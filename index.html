@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Brand new image website, leading the new trend of contemporary fans.">
+    <title>Aurelle | Official Site</title>
+
+    <!-- Bootstrap 5.3 + Google Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+
+    <!-- ===================== GLOBAL / BASE STYLES ===================== -->
+    <style>
+        :root {
+            --ink: #111;
+            --paper: #fff;
+            --light: #f5f5f5;
+            --line: rgba(0, 0, 0, .1);
+            --header-h: 64px;
+            --gap: 4px;
+            --font: "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+            --font-head: Optima, Candara, "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ink);
+            background: var(--paper);
+            overflow-x: hidden;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0;
+        }
+
+        :focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 3px;
+        }
+
+        /* Shared "icon-less" button reset used by nav / menus */
+        .btn-plain {
+            background: none;
+            border: 0;
+            color: inherit;
+            font: inherit;
+            padding: 0;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: .32em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page">
+
+        <!-- ============================================================
+             1. HEADER
+             ============================================================ -->
+        <style>
+            .site-header {
+                position: fixed;
+                inset: 0 0 auto 0;
+                z-index: 50;
+                height: var(--header-h);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 28px;
+                color: #fff;
+                transition: background .3s, color .3s, box-shadow .3s;
+            }
+
+            .site-header.is-solid {
+                background: var(--paper);
+                color: var(--ink);
+                box-shadow: 0 1px 0 var(--line);
+            }
+
+            /* desktop nav */
+            .main-nav ul {
+                display: flex;
+                align-items: center;
+                gap: 2px;
+            }
+
+            .main-nav li>a,
+            .main-nav li>button {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 10px 18px;
+                background: none;
+                border: 0;
+                color: inherit;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: .04em;
+                line-height: 1.25;
+                transition: opacity .2s;
+            }
+
+            .main-nav li>a span+span,
+            .main-nav li>button span+span {
+                font-size: 11px;
+                font-weight: 400;
+                opacity: .8;
+            }
+
+            .main-nav li>a:hover,
+            .main-nav li>button:hover {
+                opacity: .6;
+            }
+
+            .nav-news {
+                display: none;
+            }
+
+            .header-tools {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .lang {
+                font-weight: 500;
+                letter-spacing: .08em;
+            }
+
+            /* hamburger */
+            .menu-toggle {
+                display: none;
+                position: relative;
+                width: 40px;
+                height: 40px;
+            }
+
+            .menu-toggle span,
+            .menu-toggle::before,
+            .menu-toggle::after {
+                content: "";
+                position: absolute;
+                left: 9px;
+                right: 9px;
+                height: 1.5px;
+                background: currentColor;
+                transition: transform .25s, opacity .2s;
+            }
+
+            .menu-toggle::before {
+                top: 13px;
+            }
+
+            .menu-toggle span {
+                top: 19px;
+            }
+
+            .menu-toggle::after {
+                top: 25px;
+            }
+
+            .menu-open .menu-toggle::before {
+                transform: translateY(6px) rotate(45deg);
+            }
+
+            .menu-open .menu-toggle::after {
+                transform: translateY(-6px) rotate(-45deg);
+            }
+
+            .menu-open .menu-toggle span {
+                opacity: 0;
+            }
+
+            /* tablet / mobile */
+            @media (max-width: 991.98px) {
+                .site-header {
+                    padding: 0 16px;
+                }
+
+                .menu-toggle {
+                    display: block;
+                    z-index: 80;
+                }
+
+                .main-nav {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 75;
+                    padding: 100px 8vw 40px;
+                    background: rgba(17, 17, 17, .97);
+                    color: #fff;
+                    overflow-y: auto;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity .3s, visibility .3s;
+                }
+
+                .menu-open .main-nav {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                .menu-open .site-header {
+                    color: #fff;
+                    background: transparent;
+                    box-shadow: none;
+                }
+
+                .main-nav ul {
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 0;
+                }
+
+                .main-nav li>a,
+                .main-nav li>button {
+                    flex-direction: row;
+                    align-items: baseline;
+                    gap: 14px;
+                    padding: 8px 0;
+                    font-size: 32px;
+                    font-weight: 300;
+                }
+
+                .main-nav li>a span+span,
+                .main-nav li>button span+span {
+                    font-size: 13px;
+                }
+
+                .nav-news {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 40px;
+                }
+            }
+        </style>
+
+        <header class="site-header" id="header">
+            <a href="./" class="logo" aria-label="Aurelle">AURELLE</a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Main">
+                <ul>
+                    <li><button type="button" data-mega="fans"><span>fans</span><span>風扇系列</span></button></li>
+                    <li><button type="button" data-mega="lighting"><span>lighting</span><span>燈具系列</span></button></li>
+                    <li><a href="#"><span>journal</span><span>專欄消息</span></a></li>
+                    <li><a href="#"><span>story</span><span>關於我們</span></a></li>
+                    <li><a href="#"><span>contact</span><span>聯絡我們</span></a></li>
+                    <li><a href="#"><span>shop</span><span>銷售據點</span></a></li>
+                    <li class="nav-news">
+                        <p>Subscribe to newsletter</p>
+                        <a class="btn btn-outline-light btn-sm rounded-0 px-4" href="#">Subscribe</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-tools">
+                <button type="button" class="btn-plain lang" data-open-lang>EN</button>
+                <button type="button" class="btn-plain menu-toggle" id="menuToggle" aria-label="Open menu"
+                    aria-expanded="false"><span></span></button>
+            </div>
+        </header>
+
+
+        <!-- ============================================================
+             2. HERO (fixed image, content slides over it)
+             ============================================================ -->
+        <style>
+            .top-hero {
+                position: fixed;
+                inset: 0;
+                z-index: 0;
+                height: 100vh;
+                overflow: hidden;
+                background: #222;
+            }
+
+            .top-hero::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, .28), transparent 25%);
+                pointer-events: none;
+            }
+
+            .top-hero a,
+            .top-hero picture,
+            .top-hero img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* empty scroll space so the content "slides over" the hero */
+            .hero-space {
+                position: relative;
+                z-index: 1;
+                height: 100vh;
+                pointer-events: none;
+            }
+
+            .scroll-hint {
+                position: absolute;
+                left: 50%;
+                bottom: 28px;
+                transform: translateX(-50%);
+                width: 38px;
+                height: 38px;
+                display: grid;
+                place-items: center;
+                border: 1px solid rgba(255, 255, 255, .8);
+                border-radius: 50%;
+                color: #fff;
+                pointer-events: auto;
+            }
+        </style>
+
+        <section class="top-hero">
+            <a href="#">
+                <picture>
+                    <source media="(max-width: 991.98px)"
+                        srcset="https://kubrick.com.tw/upload/adrven/2609141146410000002.jpg">
+                    <img src="https://kubrick.com.tw/upload/adrven/2609141146410000001.jpg" alt="">
+                </picture>
+            </a>
+        </section>
+
+        <div class="hero-space">
+            <a href="#content" class="scroll-hint" aria-label="Scroll down">&darr;</a>
+        </div>
+
+
+        <!-- ============================================================
+             3. FULL-SCREEN SUBMENUS (Fans / Lighting)
+             ============================================================ -->
+        <style>
+            .mega {
+                position: fixed;
+                inset: 0;
+                z-index: 60;
+                display: grid;
+                grid-template-rows: auto 1fr;
+                background: rgba(17, 17, 17, .96);
+                color: #fff;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity .3s, visibility .3s;
+            }
+
+            .mega.is-open {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .mega-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: var(--header-h);
+                padding: 0 28px;
+            }
+
+            .mega-nav {
+                display: flex;
+                gap: 6px;
+            }
+
+            .mega-nav a,
+            .mega-nav button {
+                padding: 8px 14px;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .mega-nav a:hover,
+            .mega-nav button:hover {
+                opacity: .6;
+            }
+
+            .mega-right {
+                display: flex;
+                align-items: center;
+                gap: 22px;
+            }
+
+            .mega-right .lang {
+                font-weight: 500;
+                letter-spacing: .08em;
+            }
+
+            .mega-close {
+                font-size: 28px;
+                font-weight: 300;
+                line-height: 1;
+            }
+
+            .mega-back {
+                display: none;
+                padding-bottom: 20px;
+                font-size: 13px;
+                letter-spacing: .1em;
+            }
+
+            .mega-body {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                gap: 60px;
+                align-items: center;
+                width: 100%;
+                max-width: 1500px;
+                margin: 0 auto;
+                padding: 0 6vw;
+            }
+
+            .prods-list li a {
+                display: block;
+                padding: 4px 0;
+                font-size: clamp(34px, 6vmin, 68px);
+                font-weight: 300;
+                line-height: 1.2;
+                transition: opacity .25s, padding-left .25s;
+            }
+
+            .prods-list ul:hover li a {
+                opacity: .3;
+            }
+
+            .prods-list ul li a:hover {
+                opacity: 1;
+                padding-left: 12px;
+            }
+
+            .prods-list.small li a {
+                padding: 10px 0;
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            .prods-list.small li a span:first-child {
+                display: block;
+            }
+
+            .prods-list.small li a span+span {
+                font-size: 11px;
+                opacity: .65;
+            }
+
+            @media (max-width: 991.98px) {
+                .mega-top {
+                    padding: 0 16px;
+                }
+
+                .mega-nav {
+                    display: none;
+                }
+
+                .mega-back {
+                    display: block;
+                }
+
+                .mega-body {
+                    grid-template-columns: 1fr;
+                    gap: 28px;
+                    align-content: center;
+                    padding: 0 8vw;
+                }
+            }
+        </style>
+
+        <section class="mega" id="mega-fans" role="dialog" aria-label="Fans">
+            <div class="mega-top">
+                <a href="./" class="logo">AURELLE</a>
+                <ul class="mega-nav">
+                    <li><button type="button" class="btn-plain" data-mega="fans">fans</button></li>
+                    <li><button type="button" class="btn-plain" data-mega="lighting">lighting</button></li>
+                    <li><a href="#">journal</a></li>
+                    <li><a href="#">story</a></li>
+                    <li><a href="#">contact</a></li>
+                    <li><a href="#">shop</a></li>
+                </ul>
+                <div class="mega-right">
+                    <button type="button" class="btn-plain lang" data-open-lang>EN</button>
+                    <button type="button" class="btn-plain mega-close" data-close aria-label="Close">&larr;</button>
+                </div>
+            </div>
+            <div class="mega-body">
+                <div class="prods-list">
+                    <button type="button" class="btn-plain mega-back" data-close>&larr; BACK</button>
+                    <ul>
+                        <li><a href="#">Solis</a></li>
+                        <li><a href="#">Woodie</a></li>
+                        <li><a href="#">Tube</a></li>
+                        <li><a href="#">Contemporary</a></li>
+                        <li><a href="#">Signature</a></li>
+                        <li><a href="#">Aeratron</a></li>
+                    </ul>
+                </div>
+                <div class="prods-list small">
+                    <ul>
+                        <li><a href="#"><span>全品項總覽</span><span>all products</span></a></li>
+                        <li><a href="#"><span>探索新品</span><span>new collections</span></a></li>
+                        <li><a href="#"><span>商品保固登錄</span><span>warranty registration</span></a></li>
+                        <li><a href="#"><span>年度目錄下載</span><span>Catalogues</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mega" id="mega-lighting" role="dialog" aria-label="Lighting">
+            <div class="mega-top">
+                <a href="./" class="logo">AURELLE</a>
+                <ul class="mega-nav">
+                    <li><button type="button" class="btn-plain" data-mega="fans">fans</button></li>
+                    <li><button type="button" class="btn-plain" data-mega="lighting">lighting</button></li>
+                    <li><a href="#">journal</a></li>
+                    <li><a href="#">story</a></li>
+                    <li><a href="#">contact</a></li>
+                    <li><a href="#">shop</a></li>
+                </ul>
+                <div class="mega-right">
+                    <button type="button" class="btn-plain lang" data-open-lang>EN</button>
+                    <button type="button" class="btn-plain mega-close" data-close aria-label="Close">&larr;</button>
+                </div>
+            </div>
+            <div class="mega-body">
+                <div class="prods-list">
+                    <button type="button" class="btn-plain mega-back" data-close>&larr; BACK</button>
+                    <ul>
+                        <li><a href="#">Belo</a></li>
+                        <li><a href="#">Ensō</a></li>
+                    </ul>
+                </div>
+                <div class="prods-list small">
+                    <ul>
+                        <li><a href="#"><span>全品項總覽</span><span>all lighting</span></a></li>
+                        <li><a href="#"><span>探索新品</span><span>new collections</span></a></li>
+                        <li><a href="#"><span>商品保固登錄</span><span>warranty registration</span></a></li>
+                        <li><a href="#"><span>年度目錄下載</span><span>Catalogues</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             4. CHANGE COUNTRY OVERLAY
+             ============================================================ -->
+        <style>
+            .lang-frame {
+                position: fixed;
+                inset: 0;
+                z-index: 70;
+                display: grid;
+                grid-template-rows: auto 1fr;
+                background: var(--paper);
+                color: var(--ink);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity .3s, visibility .3s;
+            }
+
+            .lang-frame.is-open {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .lang-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: var(--header-h);
+                padding: 0 28px;
+            }
+
+            .lang-menu {
+                align-self: center;
+                width: min(900px, 86vw);
+                margin: 0 auto;
+            }
+
+            .lang-menu h4 {
+                margin-bottom: 28px;
+                font-size: 15px;
+                font-weight: 500;
+            }
+
+            .lang-menu a {
+                display: block;
+                padding: 6px 0;
+                font-size: clamp(30px, 5vmin, 54px);
+                font-weight: 300;
+            }
+
+            .lang-menu a:hover {
+                opacity: .5;
+            }
+        </style>
+
+        <section class="lang-frame" id="langFrame" role="dialog" aria-label="Change Country">
+            <div class="lang-top">
+                <span class="logo">AURELLE</span>
+                <button type="button" class="btn-plain mega-close" data-close-lang aria-label="Close">&times;</button>
+            </div>
+            <div class="lang-menu">
+                <h4>Change Country</h4>
+                <ul>
+                    <li><a href="#">global site</a></li>
+                    <li><a href="#">mandarin <span>中文</span></a></li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             MAIN (slides over the fixed hero)
+             ============================================================ -->
+        <style>
+            main {
+                position: relative;
+                z-index: 2;
+                background: var(--paper);
+            }
+        </style>
+
+        <main id="content">
+
+            <!-- ========================================================
+                 5. VIDEO
+                 ======================================================== -->
+            <style>
+                .video-wrap {
+                    padding-bottom: 48px;
+                }
+
+                .video-wrap .ratio {
+                    background: #000;
+                }
+            </style>
+
+            <section class="video-wrap">
+                <!-- mobile (tall) -->
+                <div class="ratio d-lg-none" style="--bs-aspect-ratio: 177.5%;">
+                    <iframe
+                        src="https://player.vimeo.com/video/1216043668?autoplay=1&loop=1&title=0&byline=0&controls=0&muted=1"
+                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video"></iframe>
+                </div>
+                <!-- desktop (16:9) -->
+                <div class="ratio ratio-16x9 d-none d-lg-block">
+                    <iframe
+                        src="https://player.vimeo.com/video/1214541381?autoplay=1&loop=1&title=0&byline=0&controls=0&muted=1"
+                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video"></iframe>
+                </div>
+            </section>
+
+
+            <!-- ========================================================
+                 6. PRODUCT SECTIONS (headings + grids, rendered by JS)
+                 ======================================================== -->
+            <style>
+                .sec-head {
+                    max-width: 1600px;
+                    margin: 0 auto;
+                    padding: 48px 28px 14px;
+                }
+
+                .sec-head h4 {
+                    font-family: var(--font-head);
+                    font-size: 16px;
+                    font-weight: 400;
+                    text-transform: capitalize;
+                }
+
+                .sec-head h5 {
+                    margin-top: 2px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    letter-spacing: .12em;
+                }
+
+                .sec-head h5:empty {
+                    display: none;
+                }
+
+                .product-wrap {
+                    max-width: 1600px;
+                    margin: 0 auto 16px;
+                    padding: 0 28px;
+                    overflow: hidden;
+                }
+
+                /* hover-swap product card */
+                .product {
+                    position: relative;
+                    display: block;
+                    overflow: hidden;
+                    background: var(--light);
+                }
+
+                .product-face {
+                    position: relative;
+                    width: 100%;
+                    overflow: hidden;
+                    transition: opacity .6s ease;
+                }
+
+                .product-face>img {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .product-face.is-back {
+                    position: absolute;
+                    inset: 0;
+                    height: 100%;
+                    opacity: 0;
+                }
+
+                .product:hover .is-front,
+                .product:focus-visible .is-front {
+                    opacity: 0;
+                }
+
+                .product:hover .is-back,
+                .product:focus-visible .is-back {
+                    opacity: 1;
+                }
+
+                .product-info {
+                    position: absolute;
+                    inset: auto 0 0 0;
+                    z-index: 2;
+                    display: flex;
+                    align-items: flex-end;
+                    gap: 16px;
+                    padding: 16px 18px;
+                    color: #fff;
+                    background: linear-gradient(to top, rgba(0, 0, 0, .4), transparent);
+                }
+
+                .product-info h6 {
+                    font-size: 13px;
+                    font-weight: 500;
+                    letter-spacing: .06em;
+                }
+
+                .product-info h6:first-child {
+                    margin-right: auto;
+                }
+
+                .product-detail {
+                    margin: 0 0 0 20px;
+                    text-align: right;
+                    font-size: 12px;
+                    letter-spacing: .06em;
+                }
+
+                .product-detail dt {
+                    margin-bottom: 4px;
+                    font-weight: 400;
+                }
+
+                .product-detail dd {
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 6px;
+                    margin: 0;
+                }
+
+                .product-detail dd img {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    box-shadow: 0 0 0 1px rgba(255, 255, 255, .85);
+                }
+
+                @media (max-width: 991.98px) {
+                    .sec-head {
+                        padding: 36px 14px 12px;
+                    }
+
+                    .product-wrap {
+                        padding: 0 4px;
+                    }
+                }
+            </style>
+
+            <article class="sec-head">
+                <h4>Soft illumination Drawn from Nature</h4>
+                <h5>探索自然柔和光影</h5>
+            </article>
+            <article class="product-wrap">
+                <div class="row g-1" data-products="lights"></div>
+            </article>
+
+            <!-- banner: Solis -->
+            <article class="banner">
+                <picture>
+                    <source media="(max-width: 991.98px)"
+                        srcset="https://kubrick.com.tw/upload/index_catalogen/2608062009240000002.jpg">
+                    <img src="https://kubrick.com.tw/upload/index_catalogen/2608062009240000001.jpg" alt=""
+                        loading="lazy">
+                </picture>
+                <div class="copy">
+                    <h6>ALL-NEW SOLIS SERIES</h6>
+                    <h2>SHAPED BY PERFORMANCE</h2>
+                    <a href="#" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER NOW</a>
+                </div>
+            </article>
+
+            <article class="sec-head">
+                <h4>Made for Compact Spaces</h4>
+                <h5></h5>
+            </article>
+            <article class="product-wrap">
+                <div class="row g-1" data-products="fans"></div>
+            </article>
+
+            <!-- banner: Belo -->
+            <article class="banner">
+                <picture>
+                    <source media="(max-width: 991.98px)"
+                        srcset="https://kubrick.com.tw/upload/index_catalogen/2608062010540000002.jpg">
+                    <img src="https://kubrick.com.tw/upload/index_catalogen/2608062010530000001.jpg" alt=""
+                        loading="lazy">
+                </picture>
+                <div class="copy">
+                    <h6>PORTABLE LIGHT</h6>
+                    <h2>BELO<br>LIGHT THAT MOVES<br>WITH YOU</h2>
+                    <a href="#" class="btn btn-outline-light rounded-0 btn-cta">LEARN MORE</a>
+                </div>
+            </article>
+
+            <article class="sec-head">
+                <h4>Made for Compact Spaces</h4>
+                <h5>感受大自然的純粹</h5>
+            </article>
+            <article class="product-wrap">
+                <div class="row g-1" data-products="belo"></div>
+            </article>
+
+
+            <!-- ========================================================
+                 7. FULL-WIDTH BANNERS (shared by every banner on the page)
+                 ======================================================== -->
+            <style>
+                .banner {
+                    position: relative;
+                    margin-top: var(--gap);
+                    aspect-ratio: 16 / 9;
+                    overflow: hidden;
+                    background: #333;
+                    color: #fff;
+                }
+
+                .banner picture,
+                .banner img {
+                    position: absolute;
+                    inset: 0;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                /* dark tint, shared with .half-banner */
+                .banner::after,
+                .half-banner::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, .2);
+                    pointer-events: none;
+                }
+
+                /* centred text block, shared with .half-banner */
+                .copy {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 2;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 24px;
+                    text-align: center;
+                }
+
+                .copy h6 {
+                    margin-bottom: 20px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    letter-spacing: .2em;
+                    text-transform: uppercase;
+                }
+
+                .copy h2 {
+                    margin-bottom: 36px;
+                    font-family: var(--font-head);
+                    font-size: clamp(34px, 6vmin, 76px);
+                    font-weight: 500;
+                    letter-spacing: .06em;
+                    line-height: 1.1;
+                    text-transform: uppercase;
+                }
+
+                .copy h2.cap {
+                    font-weight: 400;
+                    letter-spacing: .03em;
+                    text-transform: capitalize;
+                }
+
+                .copy h3 {
+                    margin-bottom: 32px;
+                    font-family: var(--font-head);
+                    font-size: clamp(26px, 3.2vw, 46px);
+                    font-weight: 400;
+                    letter-spacing: .08em;
+                    text-transform: uppercase;
+                }
+
+                /* Bootstrap outline button, tuned to the brand look */
+                .btn-cta {
+                    padding: 14px 40px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    letter-spacing: .14em;
+                    text-transform: uppercase;
+                }
+
+                @media (max-width: 991.98px) {
+                    .banner {
+                        aspect-ratio: 100 / 126.5;
+                    }
+                }
+            </style>
+
+
+            <!-- ========================================================
+                 8. SPLIT BANNERS
+                 ======================================================== -->
+            <style>
+                .split {
+                    margin-top: var(--gap);
+                }
+
+                .half-banner {
+                    position: relative;
+                    aspect-ratio: 4 / 5;
+                    overflow: hidden;
+                    color: #fff;
+                }
+
+                .half-banner>img {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            </style>
+
+            <article class="split">
+                <div class="row g-1">
+                    <div class="col-12 col-lg-6">
+                        <div class="half-banner">
+                            <img src="https://kubrick.com.tw/upload/index_catalogen/2607311943000000001.jpg"
+                                alt="Where Light Takes Form" loading="lazy">
+                            <div class="copy">
+                                <h6>OUR PRODUCTION</h6>
+                                <h3>Where Light Takes Form</h3>
+                                <a href="#" class="btn btn-outline-light rounded-0 btn-cta">READ MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="half-banner">
+                            <img src="https://kubrick.com.tw/upload/index_catalogen/2607311555190000003.jpg"
+                                alt="The Expression of Wood" loading="lazy">
+                            <div class="copy">
+                                <h6>CRAFTSMANSHIP</h6>
+                                <h3>The Expression of Wood</h3>
+                                <a href="#" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="sec-head">
+                <h4>Natural Texture, Muted Grey</h4>
+                <h5>質感 回歸本質</h5>
+            </article>
+            <article class="product-wrap">
+                <div class="row g-1" data-products="texture"></div>
+            </article>
+
+            <!-- banner: Company story -->
+            <article class="banner">
+                <picture>
+                    <source media="(max-width: 991.98px)"
+                        srcset="https://kubrick.com.tw/upload/adrven/2604011508560000002.jpg">
+                    <img src="https://kubrick.com.tw/upload/adrven/2604011508550000001.jpg" alt="" loading="lazy">
+                </picture>
+                <div class="copy">
+                    <h6>COMPANY STORY</h6>
+                    <h2 class="cap">discover<br>Aurelle story</h2>
+                    <a href="#" class="btn btn-outline-light rounded-0 btn-cta">EXPLORE</a>
+                </div>
+            </article>
+        </main>
+
+
+        <!-- ============================================================
+             9. FOOTER
+             ============================================================ -->
+        <style>
+            .site-footer {
+                position: relative;
+                z-index: 2;
+                padding: 22px 40px;
+                background: var(--light);
+            }
+
+            .foot-row {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                gap: 18px;
+                font-size: 13px;
+            }
+
+            .foot-row h6 {
+                font-size: 13px;
+                font-weight: 700;
+            }
+
+            .foot-links {
+                display: flex;
+                gap: 40px;
+                margin: 0 auto 0 24px;
+                font-weight: 700;
+            }
+
+            .foot-links.right {
+                margin: 0;
+            }
+
+            .foot-links a:hover {
+                opacity: .55;
+            }
+
+            .socials {
+                display: flex;
+                gap: 12px;
+            }
+
+            .socials a {
+                display: grid;
+                place-items: center;
+                width: 28px;
+                height: 28px;
+                border: 1px solid var(--ink);
+                border-radius: 50%;
+                font-size: 11px;
+            }
+
+            .socials a:hover {
+                background: var(--ink);
+                color: #fff;
+            }
+
+            @media (max-width: 991.98px) {
+                .site-footer {
+                    padding: 20px;
+                }
+
+                .foot-links,
+                .foot-links.right {
+                    width: 100%;
+                    margin: 0;
+                    gap: 24px;
+                }
+            }
+        </style>
+
+        <footer class="site-footer">
+            <div class="foot-row">
+                <h6>Copyright &copy; Aurelle 2026</h6>
+                <div class="foot-links">
+                    <a href="#">Terms And Conditions</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="foot-links right">
+                    <a href="#">Contact</a>
+                    <a href="#">Newsletter</a>
+                    <a href="#">Catalogues</a>
+                </div>
+                <div class="socials">
+                    <a href="#" aria-label="LINE">L</a>
+                    <a href="#" aria-label="Instagram">Ig</a>
+                    <a href="#" aria-label="Facebook">Fb</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ============================================================
+         10. BACK TO TOP
+         ============================================================ -->
+    <style>
+        #top {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 40;
+            display: none;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: #fff;
+        }
+
+        #top:hover {
+            color: #fff;
+            opacity: .8;
+        }
+    </style>
+
+    <a href="#page" id="top" aria-label="Back to top">&uarr;</a>
+
+
+    <!-- ============================================================
+         SCRIPTS
+         ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* ---------- Shared helpers ---------- */
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+        const body = document.body;
+        const IMG_BASE = "https://kubrick.com.tw/upload/";   // point this at your own uploads folder / CDN
+        const img = path => IMG_BASE + path;
+
+        /* One place decides whether the page may scroll */
+        function syncScrollLock() {
+            const locked =
+                body.classList.contains("menu-open") ||
+                $(".mega.is-open") ||
+                $("#langFrame.is-open");
+            body.classList.toggle("no-scroll", Boolean(locked));
+        }
+
+
+        /* ---------- Products (in Laravel: @foreach over the Product model, one Blade partial per card) ---------- */
+        const BELO_COLORS = [
+            "products2_color/2604201545540000001.jpg", "products2_color/2604201545210000001.jpg",
+            "products2_color/2604201546200000001.jpg", "products2_color/2604201546470000001.jpg",
+            "products2_color/2604201547150000001.jpg"
+        ];
+        const SOLIS_COLORS = [
+            "products_color/2208031830090000001.jpg", "products_color/2607311311570000001.jpg",
+            "products_color/2607311309340000001.jpg"
+        ];
+
+        const belo = (front, back, extra = {}) => ({
+            href: "#", name: "BELO", price: "USD 300", code: "KB02-A",
+            ratio: "16/20", front, back, colors: BELO_COLORS, ...extra
+        });
+        const solis = (front, back, extra = {}) => ({
+            href: "#", name: "SOLIS 40", price: "USD 850", code: "40HSEF-D",
+            ratio: "16/20", front, back, colors: SOLIS_COLORS, ...extra
+        });
+
+        const PRODUCTS = {
+            lights: [
+                belo("products2en/c_2604151108040000001.jpg", "products2en/c_2605151135370000002.jpg"),
+                belo("products2en/c_2604151103160000001.jpg", "products2en/c_2605151130140000002.jpg"),
+                belo("products2en/c_2604151119420000001.jpg", "products2en/c_2605151140020000002.jpg")
+            ],
+            fans: [
+                solis("productsen/c_2607211410320000001.jpg", "productsen/c_2607311439320000002.jpg"),
+                solis("productsen/c_2607211610430000001.jpg", "productsen/c_2607311342220000002.jpg"),
+                solis("productsen/c_2607232108560000001.jpg", "productsen/c_2607311325130000002.jpg"),
+                solis("productsen/d_26072013425700000015.jpg", "productsen/d_26073120271300000016.jpg", { code: "40HSE-D", ratio: "16/10", half: true }),
+                solis("productsen/d_26072016461400000015.jpg", "productsen/d_26072210442400000016.jpg", { code: "40HSE-D", ratio: "16/10", half: true })
+            ],
+            belo: [
+                belo("products2en/c_2604151117310000001.jpg", "products2en/c_2605151137360000002.jpg", { ratio: "16/16", half: true }),
+                belo("products2en/c_2604151101160000001.jpg", "products2en/c_2605151129190000002.jpg", { ratio: "16/16", half: true })
+            ],
+            texture: [
+                {
+                    href: "#", name: "WOODIE 50", price: "USD 850", code: "50HSDF", ratio: "16/16", half: true,
+                    front: "productsen/c_2603231713010000001.jpg", back: "productsen/c_2604061849480000002.jpg",
+                    colors: ["products_color/2207011325360000001.png", "products_color/2208111618120000001.png", "products_color/2604101815200000001.jpg"]
+                },
+                {
+                    href: "#", name: "PADERA 60", price: "USD 900", code: "60LP31-L", ratio: "16/16", half: true,
+                    front: "productsen/c_2603231740400000001.jpg", back: "productsen/c_2603291946050000002.jpg",
+                    colors: ["products_color/2208121315190000001.png", "products_color/2604101815010000001.jpg", "products_color/2208121315190000001.png"]
+                }
+            ]
+        };
+
+        function productFace(p, src, side) {
+            const swatches = p.colors.map(c => `<img src="${img(c)}" alt="" loading="lazy">`).join("");
+            return `
+                <div class="product-face is-${side}" ${side === "front" ? `style="aspect-ratio:${p.ratio}"` : ""}>
+                    <img src="${img(src)}" alt="${p.name}" loading="lazy">
+                    <div class="product-info">
+                        <h6>${p.name}</h6>
+                        <h6>${p.price}</h6>
+                        <dl class="product-detail"><dt>${p.code}</dt><dd>${swatches}</dd></dl>
+                    </div>
+                </div>`;
+        }
+
+        function productCard(p) {
+            const cols = p.half ? "col-12 col-sm-6" : "col-12 col-sm-6 col-lg-4";
+            return `
+                <div class="${cols}">
+                    <a class="product" href="${p.href}">
+                        ${productFace(p, p.front, "front")}
+                        ${productFace(p, p.back, "back")}
+                    </a>
+                </div>`;
+        }
+
+        $$("[data-products]").forEach(el => {
+            el.innerHTML = (PRODUCTS[el.dataset.products] || []).map(productCard).join("");
+        });
+
+
+        /* ---------- Header: transparent over hero, solid after scroll + back-to-top ---------- */
+        const header = $("#header");
+        const topBtn = $("#top");
+
+        function onScroll() {
+            const y = window.scrollY;
+            header.classList.toggle("is-solid", y > 30);
+            topBtn.style.display = y > window.innerHeight / 1.5 ? "grid" : "none";
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        topBtn.addEventListener("click", e => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+
+        /* ---------- Mobile menu ---------- */
+        const menuToggle = $("#menuToggle");
+
+        function setMenu(open) {
+            body.classList.toggle("menu-open", open);
+            menuToggle.setAttribute("aria-expanded", open);
+            syncScrollLock();
+        }
+
+        menuToggle.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+        $$("#mainNav a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+
+
+        /* ---------- Full-screen submenus ---------- */
+        const megas = $$(".mega");
+
+        function closeMegas() {
+            megas.forEach(m => m.classList.remove("is-open"));
+            syncScrollLock();
+        }
+
+        function openMega(name) {
+            setMenu(false);
+            megas.forEach(m => m.classList.toggle("is-open", m.id === `mega-${name}`));
+            syncScrollLock();
+        }
+
+        $$("[data-mega]").forEach(btn => btn.addEventListener("click", () => openMega(btn.dataset.mega)));
+        $$("[data-close]").forEach(btn => btn.addEventListener("click", closeMegas));
+
+
+        /* ---------- Change country ---------- */
+        const langFrame = $("#langFrame");
+
+        function setLang(open) {
+            langFrame.classList.toggle("is-open", open);
+            syncScrollLock();
+        }
+
+        $$("[data-open-lang]").forEach(btn => btn.addEventListener("click", () => setLang(true)));
+        $("[data-close-lang]").addEventListener("click", () => setLang(false));
+
+
+        /* ---------- Escape closes everything ---------- */
+        document.addEventListener("keydown", e => {
+            if (e.key !== "Escape") return;
+            setLang(false);
+            closeMegas();
+            setMenu(false);
+        });
+    </script>
+</body>
+
+</html>
