@@ -8,10 +8,8 @@
     <meta name="description" content="Brand new image website, leading the new trend of contemporary fans.">
     <title>Aurelle | Official Site</title>
 
-    <!-- Bootstrap 5.3 + Google Font -->
+    <!-- Bootstrap 5.3 (public CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
 
     <!-- ===================== GLOBAL / BASE STYLES ===================== -->
     <style>
@@ -22,8 +20,8 @@
             --line: rgba(0, 0, 0, .1);
             --header-h: 64px;
             --gap: 4px;
-            --font: "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
-            --font-head: Optima, Candara, "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+            --font: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            --font-head: Optima, Candara, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
         }
 
         body {
@@ -292,12 +290,12 @@
 
             <nav class="main-nav" id="mainNav" aria-label="Main">
                 <ul>
-                    <li><button type="button" data-mega="fans"><span>fans</span><span>風扇系列</span></button></li>
-                    <li><button type="button" data-mega="lighting"><span>lighting</span><span>燈具系列</span></button></li>
-                    <li><a href="#"><span>journal</span><span>專欄消息</span></a></li>
-                    <li><a href="#"><span>story</span><span>關於我們</span></a></li>
-                    <li><a href="#"><span>contact</span><span>聯絡我們</span></a></li>
-                    <li><a href="#"><span>shop</span><span>銷售據點</span></a></li>
+                    <li><button type="button" data-mega="fans">fans</button></li>
+                    <li><button type="button" data-mega="lighting">lighting</button></li>
+                    <li><a href="#">journal</a></li>
+                    <li><a href="#">story</a></li>
+                    <li><a href="#">contact</a></li>
+                    <li><a href="#">shop</a></li>
                     <li class="nav-news">
                         <p>Subscribe to newsletter</p>
                         <a class="btn btn-outline-light btn-sm rounded-0 px-4" href="#">Subscribe</a>
@@ -371,8 +369,9 @@
             <a href="#">
                 <picture>
                     <source media="(max-width: 991.98px)"
-                        srcset="https://kubrick.com.tw/upload/adrven/2609141146410000002.jpg">
-                    <img src="https://kubrick.com.tw/upload/adrven/2609141146410000001.jpg" alt="">
+                        srcset="https://images.pexels.com/photos/38697833/pexels-photo-38697833.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1080&amp;h=1920&amp;fit=crop">
+                    <img src="https://images.pexels.com/photos/38697833/pexels-photo-38697833.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
+                        alt="">
                 </picture>
             </a>
         </section>
@@ -488,10 +487,6 @@
                 font-weight: 400;
             }
 
-            .prods-list.small li a span:first-child {
-                display: block;
-            }
-
             .prods-list.small li a span+span {
                 font-size: 11px;
                 opacity: .65;
@@ -549,10 +544,10 @@
                 </div>
                 <div class="prods-list small">
                     <ul>
-                        <li><a href="#"><span>全品項總覽</span><span>all products</span></a></li>
-                        <li><a href="#"><span>探索新品</span><span>new collections</span></a></li>
-                        <li><a href="#"><span>商品保固登錄</span><span>warranty registration</span></a></li>
-                        <li><a href="#"><span>年度目錄下載</span><span>Catalogues</span></a></li>
+                        <li><a href="#">all products</a></li>
+                        <li><a href="#">new collections</a></li>
+                        <li><a href="#">warranty registration</a></li>
+                        <li><a href="#">Catalogues</a></li>
                     </ul>
                 </div>
             </div>
@@ -584,10 +579,10 @@
                 </div>
                 <div class="prods-list small">
                     <ul>
-                        <li><a href="#"><span>全品項總覽</span><span>all lighting</span></a></li>
-                        <li><a href="#"><span>探索新品</span><span>new collections</span></a></li>
-                        <li><a href="#"><span>商品保固登錄</span><span>warranty registration</span></a></li>
-                        <li><a href="#"><span>年度目錄下載</span><span>Catalogues</span></a></li>
+                        <li><a href="#">all lighting</a></li>
+                        <li><a href="#">new collections</a></li>
+                        <li><a href="#">warranty registration</a></li>
+                        <li><a href="#">Catalogues</a></li>
                     </ul>
                 </div>
             </div>
@@ -657,7 +652,7 @@
                 <h4>Change Country</h4>
                 <ul>
                     <li><a href="#">global site</a></li>
-                    <li><a href="#">mandarin <span>中文</span></a></li>
+                    <li><a href="#">mandarin</a></li>
                 </ul>
             </div>
         </section>
@@ -677,30 +672,37 @@
         <main id="content">
 
             <!-- ========================================================
-                 5. VIDEO
+                 5. VIDEO (Pexels demo clips, picked in the script)
                  ======================================================== -->
             <style>
                 .video-wrap {
                     padding-bottom: 48px;
                 }
 
-                .video-wrap .ratio {
+                .video-box {
+                    aspect-ratio: 16 / 9;
                     background: #000;
+                    overflow: hidden;
+                }
+
+                .video-box video {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                @media (max-width: 991.98px) {
+                    .video-box {
+                        aspect-ratio: 100 / 177.5;
+                    }
                 }
             </style>
 
             <section class="video-wrap">
-                <!-- mobile (tall) -->
-                <div class="ratio d-lg-none" style="--bs-aspect-ratio: 177.5%;">
-                    <iframe
-                        src="https://player.vimeo.com/video/1216043668?autoplay=1&loop=1&title=0&byline=0&controls=0&muted=1"
-                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video"></iframe>
-                </div>
-                <!-- desktop (16:9) -->
-                <div class="ratio ratio-16x9 d-none d-lg-block">
-                    <iframe
-                        src="https://player.vimeo.com/video/1214541381?autoplay=1&loop=1&title=0&byline=0&controls=0&muted=1"
-                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video"></iframe>
+                <div class="video-box">
+                    <video id="heroVideo" autoplay muted loop playsinline preload="metadata"
+                        aria-label="Ceiling fan spinning"></video>
                 </div>
             </section>
 
@@ -722,16 +724,7 @@
                     text-transform: capitalize;
                 }
 
-                .sec-head h5 {
-                    margin-top: 2px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    letter-spacing: .12em;
-                }
 
-                .sec-head h5:empty {
-                    display: none;
-                }
 
                 .product-wrap {
                     max-width: 1600px;
@@ -821,11 +814,10 @@
                     margin: 0;
                 }
 
-                .product-detail dd img {
+                .product-detail dd span {
                     width: 12px;
                     height: 12px;
                     border-radius: 50%;
-                    object-fit: cover;
                     box-shadow: 0 0 0 1px rgba(255, 255, 255, .85);
                 }
 
@@ -842,7 +834,6 @@
 
             <article class="sec-head">
                 <h4>Soft illumination Drawn from Nature</h4>
-                <h5>探索自然柔和光影</h5>
             </article>
             <article class="product-wrap">
                 <div class="row g-1" data-products="lights"></div>
@@ -852,9 +843,9 @@
             <article class="banner">
                 <picture>
                     <source media="(max-width: 991.98px)"
-                        srcset="https://kubrick.com.tw/upload/index_catalogen/2608062009240000002.jpg">
-                    <img src="https://kubrick.com.tw/upload/index_catalogen/2608062009240000001.jpg" alt=""
-                        loading="lazy">
+                        srcset="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1265&amp;fit=crop">
+                    <img src="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
+                        alt="" loading="lazy">
                 </picture>
                 <div class="copy">
                     <h6>ALL-NEW SOLIS SERIES</h6>
@@ -865,7 +856,6 @@
 
             <article class="sec-head">
                 <h4>Made for Compact Spaces</h4>
-                <h5></h5>
             </article>
             <article class="product-wrap">
                 <div class="row g-1" data-products="fans"></div>
@@ -875,9 +865,9 @@
             <article class="banner">
                 <picture>
                     <source media="(max-width: 991.98px)"
-                        srcset="https://kubrick.com.tw/upload/index_catalogen/2608062010540000002.jpg">
-                    <img src="https://kubrick.com.tw/upload/index_catalogen/2608062010530000001.jpg" alt=""
-                        loading="lazy">
+                        srcset="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1265&amp;fit=crop">
+                    <img src="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
+                        alt="" loading="lazy">
                 </picture>
                 <div class="copy">
                     <h6>PORTABLE LIGHT</h6>
@@ -888,7 +878,6 @@
 
             <article class="sec-head">
                 <h4>Made for Compact Spaces</h4>
-                <h5>感受大自然的純粹</h5>
             </article>
             <article class="product-wrap">
                 <div class="row g-1" data-products="belo"></div>
@@ -1019,7 +1008,7 @@
                 <div class="row g-1">
                     <div class="col-12 col-lg-6">
                         <div class="half-banner">
-                            <img src="https://kubrick.com.tw/upload/index_catalogen/2607311943000000001.jpg"
+                            <img src="https://images.pexels.com/photos/12689254/pexels-photo-12689254.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop"
                                 alt="Where Light Takes Form" loading="lazy">
                             <div class="copy">
                                 <h6>OUR PRODUCTION</h6>
@@ -1030,7 +1019,7 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="half-banner">
-                            <img src="https://kubrick.com.tw/upload/index_catalogen/2607311555190000003.jpg"
+                            <img src="https://images.pexels.com/photos/3935316/pexels-photo-3935316.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop"
                                 alt="The Expression of Wood" loading="lazy">
                             <div class="copy">
                                 <h6>CRAFTSMANSHIP</h6>
@@ -1044,7 +1033,6 @@
 
             <article class="sec-head">
                 <h4>Natural Texture, Muted Grey</h4>
-                <h5>質感 回歸本質</h5>
             </article>
             <article class="product-wrap">
                 <div class="row g-1" data-products="texture"></div>
@@ -1054,8 +1042,9 @@
             <article class="banner">
                 <picture>
                     <source media="(max-width: 991.98px)"
-                        srcset="https://kubrick.com.tw/upload/adrven/2604011508560000002.jpg">
-                    <img src="https://kubrick.com.tw/upload/adrven/2604011508550000001.jpg" alt="" loading="lazy">
+                        srcset="https://images.pexels.com/photos/7601158/pexels-photo-7601158.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1265&amp;fit=crop">
+                    <img src="https://images.pexels.com/photos/7601158/pexels-photo-7601158.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
+                        alt="" loading="lazy">
                 </picture>
                 <div class="copy">
                     <h6>COMPANY STORY</h6>
@@ -1067,7 +1056,188 @@
 
 
         <!-- ============================================================
-             9. FOOTER
+             9. LARGE FOOTER
+             ============================================================ -->
+        <style>
+            .big-footer {
+                position: relative;
+                z-index: 2;
+                padding: 96px 28px 0;
+                background: var(--ink);
+                color: #fff;
+                overflow: hidden;
+            }
+
+            .big-footer-inner {
+                max-width: 1600px;
+                margin: 0 auto;
+            }
+
+            .bf-lead {
+                max-width: 12em;
+                margin-bottom: 36px;
+                font-family: var(--font-head);
+                font-size: clamp(30px, 3.6vw, 56px);
+                font-weight: 300;
+                line-height: 1.12;
+            }
+
+            .bf-news {
+                display: flex;
+                align-items: flex-end;
+                gap: 16px;
+                max-width: 460px;
+            }
+
+            .bf-news .form-control {
+                padding: 12px 0;
+                border: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, .5);
+                border-radius: 0;
+                background: transparent;
+                color: #fff;
+                box-shadow: none;
+            }
+
+            .bf-news .form-control::placeholder {
+                color: rgba(255, 255, 255, .55);
+            }
+
+            .bf-news .form-control:focus {
+                border-bottom-color: #fff;
+                background: transparent;
+                color: #fff;
+                box-shadow: none;
+            }
+
+            .bf-title {
+                margin-bottom: 20px;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: .2em;
+                text-transform: uppercase;
+                opacity: .55;
+            }
+
+            .bf-links a {
+                display: block;
+                padding: 5px 0;
+                font-size: 15px;
+                transition: opacity .2s;
+            }
+
+            .bf-links a:hover {
+                opacity: .55;
+            }
+
+            .bf-contact {
+                margin-top: 56px;
+                padding-top: 28px;
+                border-top: 1px solid rgba(255, 255, 255, .18);
+                font-size: 14px;
+            }
+
+            .bf-contact p {
+                opacity: .75;
+            }
+
+            .bf-contact a {
+                font-size: clamp(20px, 2vw, 28px);
+                font-weight: 300;
+            }
+
+            .bf-wordmark {
+                margin: 56px 0 -.12em;
+                font-size: clamp(56px, 15.5vw, 280px);
+                font-weight: 300;
+                letter-spacing: .12em;
+                line-height: 1;
+                text-align: center;
+                white-space: nowrap;
+                color: rgba(255, 255, 255, .12);
+                user-select: none;
+            }
+
+            @media (max-width: 991.98px) {
+                .big-footer {
+                    padding: 64px 16px 0;
+                }
+
+                .bf-contact {
+                    margin-top: 40px;
+                }
+
+                .bf-wordmark {
+                    margin-top: 40px;
+                }
+            }
+        </style>
+
+        <footer class="big-footer">
+            <div class="big-footer-inner">
+                <div class="row g-5">
+                    <div class="col-12 col-lg-5">
+                        <h2 class="bf-lead">Soft light. Quiet air. Made to last.</h2>
+                        <form class="bf-news" onsubmit="event.preventDefault()">
+                            <input type="email" class="form-control" placeholder="Your email address"
+                                aria-label="Email address" required>
+                            <button type="submit" class="btn btn-outline-light rounded-0 btn-cta">Subscribe</button>
+                        </form>
+                    </div>
+
+                    <div class="col-12 col-lg-7">
+                        <div class="row g-4 bf-links">
+                            <div class="col-6 col-md-3">
+                                <h6 class="bf-title">Fans</h6>
+                                <a href="#">Solis</a>
+                                <a href="#">Woodie</a>
+                                <a href="#">Tube</a>
+                                <a href="#">Contemporary</a>
+                                <a href="#">Signature</a>
+                                <a href="#">Aeratron</a>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <h6 class="bf-title">Lighting</h6>
+                                <a href="#">Belo</a>
+                                <a href="#">Ensō</a>
+                                <a href="#">New collections</a>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <h6 class="bf-title">Company</h6>
+                                <a href="#">Story</a>
+                                <a href="#">Journal</a>
+                                <a href="#">Contact</a>
+                                <a href="#">Where to buy</a>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <h6 class="bf-title">Support</h6>
+                                <a href="#">Warranty registration</a>
+                                <a href="#">Catalogues</a>
+                                <a href="#">FAQ</a>
+                                <a href="#">Terms And Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bf-contact d-flex flex-column flex-md-row justify-content-between gap-3">
+                    <div>
+                        <p>Questions about a product or an order?</p>
+                        <a href="mailto:hello@example.com">hello@example.com</a>
+                    </div>
+                    <div class="text-md-end">
+                        <p>Showroom hours</p>
+                        <p>Mon – Sat, 10:00 – 18:00</p>
+                    </div>
+                </div>
+
+                <div class="bf-wordmark" aria-hidden="true">AURELLE</div>
+            </div>
+        </footer>
+
+
+        <!-- ============================================================
+             10. FOOTER BAR (copyright strip)
              ============================================================ -->
         <style>
             .site-footer {
@@ -1140,7 +1310,7 @@
             }
         </style>
 
-        <footer class="site-footer">
+        <div class="site-footer">
             <div class="foot-row">
                 <h6>Copyright &copy; Aurelle 2026</h6>
                 <div class="foot-links">
@@ -1158,12 +1328,12 @@
                     <a href="#" aria-label="Facebook">Fb</a>
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
 
 
     <!-- ============================================================
-         10. BACK TO TOP
+         11. BACK TO TOP
          ============================================================ -->
     <style>
         #top {
@@ -1199,8 +1369,9 @@
         const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
         const body = document.body;
-        const IMG_BASE = "https://kubrick.com.tw/upload/";   // point this at your own uploads folder / CDN
-        const img = path => IMG_BASE + path;
+        /* ---------- Demo media (Pexels, free to use) ---------- */
+        const px = (id, w, h) =>
+            `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}&h=${h}&fit=crop`;
 
         /* One place decides whether the page may scroll */
         function syncScrollLock() {
@@ -1213,61 +1384,45 @@
 
 
         /* ---------- Products (in Laravel: @foreach over the Product model, one Blade partial per card) ---------- */
-        const BELO_COLORS = [
-            "products2_color/2604201545540000001.jpg", "products2_color/2604201545210000001.jpg",
-            "products2_color/2604201546200000001.jpg", "products2_color/2604201546470000001.jpg",
-            "products2_color/2604201547150000001.jpg"
-        ];
-        const SOLIS_COLORS = [
-            "products_color/2208031830090000001.jpg", "products_color/2607311311570000001.jpg",
-            "products_color/2607311309340000001.jpg"
-        ];
+        const FINISH_WALNUT = ["#5e3f29", "#d1a56f", "#fbfbf9"];
+        const FINISH_MODERN = ["#1f1f1f", "#8b8d8f", "#fbfbf9"];
+        const SIZES = { "16/20": [800, 1000], "16/10": [1000, 625], "16/16": [800, 800] };
 
-        const belo = (front, back, extra = {}) => ({
-            href: "#", name: "BELO", price: "USD 300", code: "KB02-A",
-            ratio: "16/20", front, back, colors: BELO_COLORS, ...extra
-        });
-        const solis = (front, back, extra = {}) => ({
-            href: "#", name: "SOLIS 40", price: "USD 850", code: "40HSEF-D",
-            ratio: "16/20", front, back, colors: SOLIS_COLORS, ...extra
-        });
+        /* front / back = Pexels photo ids */
+        const product = (front, back, name, price, code, colors, extra = {}) => {
+            const ratio = extra.ratio || "16/20";
+            const [w, h] = SIZES[ratio];
+            return { href: "#", name, price, code, colors, ratio, front: px(front, w, h), back: px(back, w, h), ...extra };
+        };
 
         const PRODUCTS = {
             lights: [
-                belo("products2en/c_2604151108040000001.jpg", "products2en/c_2605151135370000002.jpg"),
-                belo("products2en/c_2604151103160000001.jpg", "products2en/c_2605151130140000002.jpg"),
-                belo("products2en/c_2604151119420000001.jpg", "products2en/c_2605151140020000002.jpg")
+                product(12689254, 38697833, "BELO", "USD 300", "KB02-A", FINISH_WALNUT),
+                product(38697833, 7601158, "BELO", "USD 300", "KB02-A", FINISH_WALNUT),
+                product(7601158, 12689254, "BELO", "USD 300", "KB02-A", FINISH_WALNUT)
             ],
             fans: [
-                solis("productsen/c_2607211410320000001.jpg", "productsen/c_2607311439320000002.jpg"),
-                solis("productsen/c_2607211610430000001.jpg", "productsen/c_2607311342220000002.jpg"),
-                solis("productsen/c_2607232108560000001.jpg", "productsen/c_2607311325130000002.jpg"),
-                solis("productsen/d_26072013425700000015.jpg", "productsen/d_26073120271300000016.jpg", { code: "40HSE-D", ratio: "16/10", half: true }),
-                solis("productsen/d_26072016461400000015.jpg", "productsen/d_26072210442400000016.jpg", { code: "40HSE-D", ratio: "16/10", half: true })
+                product(7601104, 3958956, "SOLIS 40", "USD 850", "40HSEF-D", FINISH_MODERN),
+                product(7601161, 3935353, "SOLIS 40", "USD 850", "40HSEF-D", FINISH_MODERN),
+                product(3935316, 37184143, "SOLIS 40", "USD 850", "40HSEF-D", FINISH_MODERN),
+                product(7027790, 8951851, "SOLIS 40", "USD 850", "40HSE-D", FINISH_MODERN, { ratio: "16/10", half: true }),
+                product(3990590, 3958953, "SOLIS 40", "USD 850", "40HSE-D", FINISH_MODERN, { ratio: "16/10", half: true })
             ],
             belo: [
-                belo("products2en/c_2604151117310000001.jpg", "products2en/c_2605151137360000002.jpg", { ratio: "16/16", half: true }),
-                belo("products2en/c_2604151101160000001.jpg", "products2en/c_2605151129190000002.jpg", { ratio: "16/16", half: true })
+                product(8951851, 7601161, "BELO", "USD 300", "KB02-A", FINISH_WALNUT, { ratio: "16/16", half: true }),
+                product(3958953, 12689254, "BELO", "USD 300", "KB02-A", FINISH_WALNUT, { ratio: "16/16", half: true })
             ],
             texture: [
-                {
-                    href: "#", name: "WOODIE 50", price: "USD 850", code: "50HSDF", ratio: "16/16", half: true,
-                    front: "productsen/c_2603231713010000001.jpg", back: "productsen/c_2604061849480000002.jpg",
-                    colors: ["products_color/2207011325360000001.png", "products_color/2208111618120000001.png", "products_color/2604101815200000001.jpg"]
-                },
-                {
-                    href: "#", name: "PADERA 60", price: "USD 900", code: "60LP31-L", ratio: "16/16", half: true,
-                    front: "productsen/c_2603231740400000001.jpg", back: "productsen/c_2603291946050000002.jpg",
-                    colors: ["products_color/2208121315190000001.png", "products_color/2604101815010000001.jpg", "products_color/2208121315190000001.png"]
-                }
+                product(38697833, 3935316, "WOODIE 50", "USD 850", "50HSDF", FINISH_WALNUT, { ratio: "16/16", half: true }),
+                product(3958956, 7601104, "PADERA 60", "USD 900", "60LP31-L", FINISH_MODERN, { ratio: "16/16", half: true })
             ]
         };
 
         function productFace(p, src, side) {
-            const swatches = p.colors.map(c => `<img src="${img(c)}" alt="" loading="lazy">`).join("");
+            const swatches = p.colors.map(c => `<span style="background:${c}"></span>`).join("");
             return `
                 <div class="product-face is-${side}" ${side === "front" ? `style="aspect-ratio:${p.ratio}"` : ""}>
-                    <img src="${img(src)}" alt="${p.name}" loading="lazy">
+                    <img src="${src}" alt="${p.name}" loading="lazy">
                     <div class="product-info">
                         <h6>${p.name}</h6>
                         <h6>${p.price}</h6>
@@ -1360,6 +1515,31 @@
             closeMegas();
             setMenu(false);
         });
+
+        /* ---------- Video: Pexels demo clips (desktop 16:9, mobile 9:16) ---------- */
+        const VIDEOS = {
+            desktop: {
+                src: "https://videos.pexels.com/video-files/34586520/14656246_2560_1440_30fps.mp4",
+                poster: "https://images.pexels.com/videos/34586520/pexels-photo-34586520.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
+            },
+            mobile: {
+                src: "https://videos.pexels.com/video-files/29624123/12747656_1440_2560_30fps.mp4",
+                poster: "https://images.pexels.com/videos/29624123/pexels-photo-29624123.jpeg?auto=compress&cs=tinysrgb&w=900&h=1600&fit=crop"
+            }
+        };
+        const heroVideo = $("#heroVideo");
+        const mqMobile = window.matchMedia("(max-width: 991.98px)");
+
+        function setVideo() {
+            const key = mqMobile.matches ? "mobile" : "desktop";
+            if (heroVideo.dataset.clip === key) return;
+            heroVideo.dataset.clip = key;
+            heroVideo.poster = VIDEOS[key].poster;
+            heroVideo.src = VIDEOS[key].src;
+            heroVideo.play().catch(() => { });
+        }
+        setVideo();
+        mqMobile.addEventListener("change", setVideo);
     </script>
 </body>
 
