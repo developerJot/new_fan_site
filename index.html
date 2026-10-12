@@ -95,27 +95,13 @@
 </head>
 
 <body>
-    <!-- ================================================================
-     SITE HEADER COMPONENT   (BEGIN - copy everything down to END)
-     ----------------------------------------------------------------
-     Contains: header bar + mobile menu, Fans / Lighting full-screen
-     menus, Change-Country overlay, and the script that runs them.
 
-     No dependency on Bootstrap, jQuery or any other page CSS / JS.
 
-     HOW TO REUSE
-     - Plain HTML : paste this block right after <body> on every page.
-     - Laravel    : save as  resources/views/partials/header.blade.php
-                    then use  @include('partials.header')  on each page.
-     - Pages that start with a hero image : keep <header class="site-header">
-       (transparent on top, turns solid after 30px of scroll).
-     - Pages WITHOUT a hero (inner pages) : use
-       <header class="site-header is-solid" data-solid>  (always solid).
+    <!-- =====================================================================
+         SECTION 1 : HEADER  (+ Fans / Lighting full-screen menus + Country overlay)
+         ===================================================================== -->
 
-     Optional design tokens (all have fallbacks, set them on :root to change):
-       --header-h  --paper  --ink  --line  --font
-     ================================================================ -->
-
+    <!-- 1) STYLE -->
     <style>
         /* ---------- scoped base (so the component looks the same on any page) ---------- */
         .site-header,
@@ -162,10 +148,6 @@
             outline-offset: 3px;
         }
 
-        body.no-scroll {
-            overflow: hidden;
-        }
-
         .hd-logo {
             font-size: 22px;
             font-weight: 500;
@@ -202,7 +184,7 @@
             color: #111;
         }
 
-        /* ---------- 1. header bar ---------- */
+        /* ---------- header bar ---------- */
         .site-header {
             position: fixed;
             inset: 0 0 auto 0;
@@ -302,7 +284,7 @@
             opacity: 0;
         }
 
-        /* ---------- 2. full-screen submenus (Fans / Lighting) ---------- */
+        /* ---------- full-screen submenus (Fans / Lighting) ---------- */
         .mega {
             position: fixed;
             inset: 0;
@@ -399,7 +381,7 @@
             font-weight: 400;
         }
 
-        /* ---------- 3. change-country overlay ---------- */
+        /* ---------- change-country overlay ---------- */
         .lang-frame {
             position: fixed;
             inset: 0;
@@ -528,6 +510,7 @@
         }
     </style>
 
+    <!-- 1) HTML -->
     <!-- header bar -->
     <header class="site-header" id="header">
         <a href="./" class="hd-logo" aria-label="Aurelle home">AURELLE</a>
@@ -645,7 +628,7 @@
         </div>
     </section>
 
-    <!-- header behaviour (self-contained, adds nothing to the global scope) -->
+    <!-- 1) SCRIPT -->
     <script>
         (function () {
             const body = document.body;
@@ -717,806 +700,1408 @@
         })();
     </script>
 
-    <!-- ================================================================
-     SITE HEADER COMPONENT   (END)
-     ================================================================ -->
 
-    <div id="page">
 
-        <!-- ============================================================
-             2. HERO (fixed image + text on the left, content slides over it)
-             ============================================================ -->
-        <style>
-            .top-hero {
-                position: fixed;
-                inset: 0;
-                z-index: 0;
-                height: 100vh;
-                height: 100svh;
-                overflow: hidden;
-                background: #222;
-            }
 
-            /* top shade for the header + left shade so the text stays readable */
-            .top-hero::after {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background:
-                    linear-gradient(to bottom, rgba(0, 0, 0, .28), transparent 25%),
-                    linear-gradient(to right, rgba(0, 0, 0, .5), transparent 65%);
-                pointer-events: none;
-            }
+    <!-- =====================================================================
+         SECTION 2 : HERO (fixed image + text, the page content slides over it)
+         ===================================================================== -->
 
-            .hero-img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+    <!-- 2) STYLE -->
+    <style>
+        .top-hero {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            height: 100vh;
+            height: 100svh;
+            overflow: hidden;
+            background: #222;
+        }
 
+        /* top shade for the header + left shade so the text stays readable */
+        .top-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(0, 0, 0, .28), transparent 25%),
+                linear-gradient(to right, rgba(0, 0, 0, .5), transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-copy {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            max-width: 680px;
+            padding: var(--header-h) 28px 0;
+            color: #fff;
+            pointer-events: none;
+        }
+
+        .hero-copy .btn {
+            pointer-events: auto;
+        }
+
+        .hero-eyebrow {
+            margin-bottom: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            margin-bottom: 20px;
+            font-family: var(--font-head);
+            font-size: clamp(40px, 6.2vw, 96px);
+            font-weight: 300;
+            line-height: 1.05;
+        }
+
+        .hero-text {
+            max-width: 30em;
+            margin-bottom: 36px;
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: .9;
+        }
+
+        /* empty scroll space so the content "slides over" the hero */
+        .hero-space {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            height: 100svh;
+            pointer-events: none;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            left: 50%;
+            bottom: 28px;
+            transform: translateX(-50%);
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .8);
+            border-radius: 50%;
+            color: #fff;
+            pointer-events: auto;
+        }
+
+        @media (max-width: 991.98px) {
             .hero-copy {
-                position: absolute;
-                inset: 0;
-                z-index: 2;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: center;
-                max-width: 680px;
-                padding: var(--header-h) 28px 0;
-                color: #fff;
-                pointer-events: none;
-            }
-
-            .hero-copy .btn {
-                pointer-events: auto;
-            }
-
-            .hero-eyebrow {
-                margin-bottom: 20px;
-                font-size: 13px;
-                font-weight: 500;
-                letter-spacing: .2em;
-                text-transform: uppercase;
-            }
-
-            .hero-title {
-                margin-bottom: 20px;
-                font-family: var(--font-head);
-                font-size: clamp(40px, 6.2vw, 96px);
-                font-weight: 300;
-                line-height: 1.05;
+                justify-content: flex-end;
+                max-width: none;
+                padding: var(--header-h) 16px 110px;
             }
 
             .hero-text {
-                max-width: 30em;
-                margin-bottom: 36px;
-                font-size: 16px;
-                line-height: 1.7;
-                opacity: .9;
-            }
-
-            /* empty scroll space so the content "slides over" the hero */
-            .hero-space {
-                position: relative;
-                z-index: 1;
-                height: 100vh;
-                height: 100svh;
-                pointer-events: none;
-            }
-
-            .scroll-hint {
-                position: absolute;
-                left: 50%;
-                bottom: 28px;
-                transform: translateX(-50%);
-                width: 38px;
-                height: 38px;
-                display: grid;
-                place-items: center;
-                border: 1px solid rgba(255, 255, 255, .8);
-                border-radius: 50%;
-                color: #fff;
-                pointer-events: auto;
-            }
-
-            @media (max-width: 991.98px) {
-                .hero-copy {
-                    justify-content: flex-end;
-                    max-width: none;
-                    padding: var(--header-h) 16px 110px;
-                }
-
-                .hero-text {
-                    margin-bottom: 28px;
-                    font-size: 15px;
-                }
-            }
-        </style>
-
-        <section class="top-hero">
-            <img class="hero-img" src="./img/home-banner.png" alt="">
-
-            <div class="hero-copy">
-                <p class="hero-eyebrow">New collection 2026</p>
-                <h1 class="hero-title">Soft air,<br>quiet light.</h1>
-                <p class="hero-text">Ceiling fans designed to move air gently and shape the light in every room.</p>
-                <a href="#content" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER NOW</a>
-            </div>
-        </section>
-
-        <div class="hero-space">
-            <a href="#content" class="scroll-hint" aria-label="Scroll down">&darr;</a>
-        </div>
-
-        <!-- ============================================================
-             MAIN (slides over the fixed hero)
-             ============================================================ -->
-        <style>
-            main {
-                position: relative;
-                z-index: 2;
-                background: var(--paper);
-            }
-        </style>
-
-        <main id="content">
-
-            <!-- ========================================================
-                 5. VIDEO (Pexels demo clips, picked in the script)
-                 ======================================================== -->
-            <style>
-                .video-wrap {
-                    padding-bottom: 48px;
-                }
-
-                .video-box {
-                    aspect-ratio: 16 / 9;
-                    background: #000;
-                    overflow: hidden;
-                }
-
-                .video-box video {
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                @media (max-width: 991.98px) {
-                    .video-box {
-                        aspect-ratio: 100 / 177.5;
-                    }
-                }
-            </style>
-
-            <section class="video-wrap">
-                <div class="video-box">
-                    <video id="heroVideo" autoplay muted loop playsinline preload="metadata"
-                        aria-label="Ceiling fan spinning"></video>
-                </div>
-            </section>
-
-            <!-- ========================================================
-                 6. PRODUCT SECTIONS (headings + grids, rendered by JS)
-                 ======================================================== -->
-            <style>
-                .sec-head {
-                    max-width: 1600px;
-                    margin: 0 auto;
-                    padding: 48px 28px 14px;
-                }
-
-                .sec-head h4 {
-                    font-family: var(--font-head);
-                    font-size: 16px;
-                    font-weight: 400;
-                    text-transform: capitalize;
-                }
-
-                .product-wrap {
-                    max-width: 1600px;
-                    margin: 0 auto 16px;
-                    padding: 0 28px;
-                    overflow: hidden;
-                }
-
-                /* hover-swap product card */
-                .product {
-                    position: relative;
-                    display: block;
-                    overflow: hidden;
-                    background: var(--light);
-                }
-
-                .product-face {
-                    position: relative;
-                    width: 100%;
-                    overflow: hidden;
-                    transition: opacity .6s ease;
-                }
-
-                .product-face>img {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                .product-face.is-back {
-                    position: absolute;
-                    inset: 0;
-                    height: 100%;
-                    opacity: 0;
-                }
-
-                .product:hover .is-front,
-                .product:focus-visible .is-front {
-                    opacity: 0;
-                }
-
-                .product:hover .is-back,
-                .product:focus-visible .is-back {
-                    opacity: 1;
-                }
-
-                .product-info {
-                    position: absolute;
-                    inset: auto 0 0 0;
-                    z-index: 2;
-                    display: flex;
-                    align-items: flex-end;
-                    gap: 16px;
-                    padding: 16px 18px;
-                    color: #fff;
-                    background: linear-gradient(to top, rgba(0, 0, 0, .4), transparent);
-                }
-
-                .product-info h6 {
-                    font-size: 13px;
-                    font-weight: 500;
-                    letter-spacing: .06em;
-                }
-
-                .product-info h6:first-child {
-                    margin-right: auto;
-                }
-
-                .product-detail {
-                    margin: 0 0 0 20px;
-                    text-align: right;
-                    font-size: 12px;
-                    letter-spacing: .06em;
-                }
-
-                .product-detail dt {
-                    margin-bottom: 4px;
-                    font-weight: 400;
-                }
-
-                .product-detail dd {
-                    display: flex;
-                    justify-content: flex-end;
-                    gap: 6px;
-                    margin: 0;
-                }
-
-                .product-detail dd span {
-                    width: 12px;
-                    height: 12px;
-                    border-radius: 50%;
-                    box-shadow: 0 0 0 1px rgba(255, 255, 255, .85);
-                }
-
-                @media (max-width: 991.98px) {
-                    .sec-head {
-                        padding: 36px 14px 12px;
-                    }
-
-                    .product-wrap {
-                        padding: 0 4px;
-                    }
-                }
-            </style>
-
-            <article class="sec-head">
-                <h4>Soft illumination Drawn from Nature</h4>
-            </article>
-            <article class="product-wrap">
-                <div class="row g-1" data-products="lights"></div>
-            </article>
-
-            <!-- banner: Solis -->
-            <article class="banner">
-                <picture>
-                    <source media="(max-width: 991.98px)"
-                        srcset="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1265&amp;fit=crop">
-                    <img src="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
-                        alt="" loading="lazy">
-                </picture>
-                <div class="copy">
-                    <h6>ALL-NEW SOLIS SERIES</h6>
-                    <h2>SHAPED BY PERFORMANCE</h2>
-                    <a href="#" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER NOW</a>
-                </div>
-            </article>
-
-            <article class="sec-head">
-                <h4>Made for Compact Spaces</h4>
-            </article>
-            <article class="product-wrap">
-                <div class="row g-1" data-products="fans"></div>
-            </article>
-
-            <!-- banner: Belo -->
-            <article class="banner">
-                <picture>
-                    <source media="(max-width: 991.98px)"
-                        srcset="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1265&amp;fit=crop">
-                    <img src="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
-                        alt="" loading="lazy">
-                </picture>
-                <div class="copy">
-                    <h6>PORTABLE LIGHT</h6>
-                    <h2>BELO<br>LIGHT THAT MOVES<br>WITH YOU</h2>
-                    <a href="#" class="btn btn-outline-light rounded-0 btn-cta">LEARN MORE</a>
-                </div>
-            </article>
-
-            <article class="sec-head">
-                <h4>Made for Compact Spaces</h4>
-            </article>
-            <article class="product-wrap">
-                <div class="row g-1" data-products="belo"></div>
-            </article>
-
-            <!-- ========================================================
-                 7. FULL-WIDTH BANNERS (shared by every banner on the page)
-                 ======================================================== -->
-            <style>
-                .banner {
-                    position: relative;
-                    margin-top: var(--gap);
-                    aspect-ratio: 16 / 9;
-                    overflow: hidden;
-                    background: #333;
-                    color: #fff;
-                }
-
-                .banner picture,
-                .banner img {
-                    position: absolute;
-                    inset: 0;
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                /* dark tint, shared with .half-banner */
-                .banner::after,
-                .half-banner::after {
-                    content: "";
-                    position: absolute;
-                    inset: 0;
-                    background: rgba(0, 0, 0, .2);
-                    pointer-events: none;
-                }
-
-                /* centred text block, shared with .half-banner */
-                .copy {
-                    position: absolute;
-                    inset: 0;
-                    z-index: 2;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 0 24px;
-                    text-align: center;
-                }
-
-                .copy h6 {
-                    margin-bottom: 20px;
-                    font-size: 13px;
-                    font-weight: 500;
-                    letter-spacing: .2em;
-                    text-transform: uppercase;
-                }
-
-                .copy h2 {
-                    margin-bottom: 36px;
-                    font-family: var(--font-head);
-                    font-size: clamp(34px, 6vmin, 76px);
-                    font-weight: 500;
-                    letter-spacing: .06em;
-                    line-height: 1.1;
-                    text-transform: uppercase;
-                }
-
-                .copy h2.cap {
-                    font-weight: 400;
-                    letter-spacing: .03em;
-                    text-transform: capitalize;
-                }
-
-                .copy h3 {
-                    margin-bottom: 32px;
-                    font-family: var(--font-head);
-                    font-size: clamp(26px, 3.2vw, 46px);
-                    font-weight: 400;
-                    letter-spacing: .08em;
-                    text-transform: uppercase;
-                }
-
-
-
-                @media (max-width: 991.98px) {
-                    .banner {
-                        aspect-ratio: 100 / 126.5;
-                    }
-                }
-            </style>
-
-            <!-- ========================================================
-                 8. SPLIT BANNERS
-                 ======================================================== -->
-            <style>
-                .split {
-                    margin-top: var(--gap);
-                    overflow: hidden;
-                    /* clips the row's negative gutter margins -> no sideways gap */
-                }
-
-                .half-banner {
-                    position: relative;
-                    aspect-ratio: 4 / 5;
-                    overflow: hidden;
-                    color: #fff;
-                }
-
-                .half-banner>img {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            </style>
-
-            <article class="split">
-                <div class="row g-1">
-                    <div class="col-12 col-lg-6">
-                        <div class="half-banner">
-                            <img src="https://images.pexels.com/photos/12689254/pexels-photo-12689254.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop"
-                                alt="Where Light Takes Form" loading="lazy">
-                            <div class="copy">
-                                <h6>OUR PRODUCTION</h6>
-                                <h3>Where Light Takes Form</h3>
-                                <a href="#" class="btn btn-outline-light rounded-0 btn-cta">READ MORE</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="half-banner">
-                            <img src="https://images.pexels.com/photos/3935316/pexels-photo-3935316.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop"
-                                alt="The Expression of Wood" loading="lazy">
-                            <div class="copy">
-                                <h6>CRAFTSMANSHIP</h6>
-                                <h3>The Expression of Wood</h3>
-                                <a href="#" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER MORE</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="sec-head">
-                <h4>Natural Texture, Muted Grey</h4>
-            </article>
-            <article class="product-wrap">
-                <div class="row g-1" data-products="texture"></div>
-            </article>
-
-            <!-- banner: Company story -->
-            <article class="banner">
-                <picture>
-                    <source media="(max-width: 991.98px)"
-                        srcset="https://images.pexels.com/photos/7601158/pexels-photo-7601158.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1265&amp;fit=crop">
-                    <img src="https://images.pexels.com/photos/7601158/pexels-photo-7601158.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
-                        alt="" loading="lazy">
-                </picture>
-                <div class="copy">
-                    <h6>COMPANY STORY</h6>
-                    <h2 class="cap">discover<br>Aurelle story</h2>
-                    <a href="#" class="btn btn-outline-light rounded-0 btn-cta">EXPLORE</a>
-                </div>
-            </article>
-        </main>
-
-        <!-- ============================================================
-             9. LARGE FOOTER
-             ============================================================ -->
-        <style>
-            .big-footer {
-                position: relative;
-                z-index: 2;
-                padding: 96px 28px 0;
-                background: var(--ink);
-                color: #fff;
-                overflow: hidden;
-            }
-
-            .big-footer-inner {
-                max-width: 1600px;
-                margin: 0 auto;
-            }
-
-            .bf-lead {
-                max-width: 12em;
-                margin-bottom: 36px;
-                font-family: var(--font-head);
-                font-size: clamp(30px, 3.6vw, 56px);
-                font-weight: 300;
-                line-height: 1.12;
-            }
-
-            .bf-news {
-                display: flex;
-                align-items: flex-end;
-                gap: 16px;
-                max-width: 460px;
-            }
-
-            .bf-news .form-control {
-                flex: 1;
-                min-width: 0;
-                padding: 12px 0;
-                border: 0;
-                border-bottom: 1px solid rgba(255, 255, 255, .5);
-                border-radius: 0;
-                background: transparent;
-                color: #fff;
-                box-shadow: none;
-            }
-
-            .bf-news .form-control::placeholder {
-                color: rgba(255, 255, 255, .55);
-            }
-
-            .bf-news .form-control:focus {
-                border-bottom-color: #fff;
-                background: transparent;
-                color: #fff;
-                box-shadow: none;
-            }
-
-            .bf-title {
-                margin-bottom: 20px;
-                font-size: 12px;
-                font-weight: 500;
-                letter-spacing: .2em;
-                text-transform: uppercase;
-                opacity: .55;
-            }
-
-            .bf-links a {
-                display: block;
-                padding: 5px 0;
+                margin-bottom: 28px;
                 font-size: 15px;
-                transition: opacity .2s;
+            }
+        }
+    </style>
+
+    <!-- 2) HTML -->
+    <section class="top-hero">
+        <img class="hero-img" src="./img/home-banner.png" alt="">
+
+        <div class="hero-copy">
+            <p class="hero-eyebrow">New collection 2026</p>
+            <h1 class="hero-title">Soft air,<br>quiet light.</h1>
+            <p class="hero-text">Ceiling fans designed to move air gently and shape the light in every room.</p>
+            <a href="#content" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER NOW</a>
+        </div>
+    </section>
+
+    <div class="hero-space">
+        <a href="#content" class="scroll-hint" aria-label="Scroll down">&darr;</a>
+    </div>
+
+    <!-- 2) SCRIPT -->
+    <!-- no script needed for the hero -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 3 : VIDEO
+         ===================================================================== -->
+
+    <!-- 3) STYLE -->
+    <style>
+        .video-wrap {
+            position: relative;
+            z-index: 2;
+            background: var(--paper);
+            padding-bottom: 48px;
+        }
+
+        .video-box {
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-box video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 991.98px) {
+            .video-box {
+                aspect-ratio: 100 / 177.5;
+            }
+        }
+    </style>
+
+    <!-- 3) HTML -->
+    <section class="video-wrap" id="content">
+        <div class="video-box">
+            <video id="heroVideo" autoplay muted loop playsinline preload="metadata"
+                aria-label="Ceiling fan spinning"></video>
+        </div>
+    </section>
+
+    <!-- 3) SCRIPT : picks the desktop or mobile clip -->
+    <script>
+        (function () {
+            var video = document.getElementById("heroVideo");
+            var mobile = window.matchMedia("(max-width: 991.98px)");
+
+            var desktopClip = {
+                src: "./img/home-video.mp4",
+                poster: "https://images.pexels.com/videos/34586520/pexels-photo-34586520.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
+            };
+            var mobileClip = {
+                src: "./img/home-video.mp4",
+                poster: "https://images.pexels.com/videos/29624123/pexels-photo-29624123.jpeg?auto=compress&cs=tinysrgb&w=900&h=1600&fit=crop"
+            };
+
+            function setVideo() {
+                var clip = mobile.matches ? mobileClip : desktopClip;
+                var key = mobile.matches ? "mobile" : "desktop";
+                if (video.dataset.clip === key) return;
+                video.dataset.clip = key;
+                video.poster = clip.poster;
+                video.src = clip.src;
+                video.play().catch(function () { });
             }
 
-            .bf-links a:hover {
-                opacity: .55;
+            setVideo();
+            mobile.addEventListener("change", setVideo);
+        })();
+    </script>
+
+
+
+
+    <!-- =====================================================================
+         SECTION 4 : PRODUCTS - "Soft illumination Drawn from Nature"
+         (this style block is shared by ALL product sections below)
+         ===================================================================== -->
+
+    <!-- 4) STYLE -->
+    <style>
+        /* full-width wrapper so the page colour covers the fixed hero */
+        .product-section {
+            position: relative;
+            z-index: 2;
+            background: var(--paper);
+        }
+
+        .sec-head {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 48px 28px 14px;
+        }
+
+        .sec-head h4 {
+            font-family: var(--font-head);
+            font-size: 16px;
+            font-weight: 400;
+            text-transform: capitalize;
+        }
+
+        .product-wrap {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 28px 16px;
+            overflow: hidden;
+        }
+
+        /* hover-swap product card */
+        .product {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            background: var(--light);
+        }
+
+        .product-face {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            transition: opacity .6s ease;
+        }
+
+        .product-face>img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-face.is-back {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .product:hover .is-front,
+        .product:focus-visible .is-front {
+            opacity: 0;
+        }
+
+        .product:hover .is-back,
+        .product:focus-visible .is-back {
+            opacity: 1;
+        }
+
+        /* image shapes (width / height) */
+        .r-16-20 {
+            aspect-ratio: 16 / 20;
+        }
+
+        .r-16-10 {
+            aspect-ratio: 16 / 10;
+        }
+
+        .r-16-16 {
+            aspect-ratio: 16 / 16;
+        }
+
+        .product-info {
+            position: absolute;
+            inset: auto 0 0 0;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            padding: 16px 18px;
+            color: #fff;
+            background: linear-gradient(to top, rgba(0, 0, 0, .4), transparent);
+        }
+
+        .product-info h6 {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .06em;
+        }
+
+        .product-info h6:first-child {
+            margin-right: auto;
+        }
+
+        .product-detail {
+            margin: 0 0 0 20px;
+            text-align: right;
+            font-size: 12px;
+            letter-spacing: .06em;
+        }
+
+        .product-detail dt {
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+
+        .product-detail dd {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            margin: 0;
+        }
+
+        /* colour dots */
+        .product-detail dd span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .85);
+        }
+
+        .dot-brown {
+            background: #5e3f29;
+        }
+
+        .dot-tan {
+            background: #d1a56f;
+        }
+
+        .dot-white {
+            background: #fbfbf9;
+        }
+
+        .dot-black {
+            background: #1f1f1f;
+        }
+
+        .dot-grey {
+            background: #8b8d8f;
+        }
+
+        @media (max-width: 991.98px) {
+            .sec-head {
+                padding: 36px 14px 12px;
+            }
+
+            .product-wrap {
+                padding: 0 0 16px;
+                /* cards run edge to edge, like the banners */
+            }
+        }
+    </style>
+
+    <!-- 4) HTML -->
+    <section class="product-section">
+        <article class="sec-head">
+            <h4>Soft illumination Drawn from Nature</h4>
+        </article>
+
+        <article class="product-wrap">
+            <div class="row g-1">
+
+                <!-- BELO 1 -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-20">
+                            <img src="./img/fan-3.jpeg" alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="./img/fan-one.jpeg" alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- BELO 2 -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-20">
+                            <img src="./img/fan-black.png" alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="./img/fan-3.jpeg" alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- BELO 3 -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-20">
+                            <img src="./img/fan-gray.png" alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="./img/fan-3.jpeg" alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </article>
+    </section>
+
+    <!-- 4) SCRIPT -->
+    <!-- no script needed (the products used to be built by JS, now they are plain HTML) -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 5 : BANNER - Solis
+         (this style block is shared by ALL full-width banners below)
+         ===================================================================== -->
+
+    <!-- 5) STYLE -->
+    <style>
+        /* wrapper gives the 4px gap + page colour (so the fixed hero never shows through) */
+        .banner-wrap {
+            position: relative;
+            z-index: 2;
+            background: var(--paper);
+            padding-top: var(--gap);
+        }
+
+        .banner {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #333;
+            color: #fff;
+        }
+
+        .banner picture,
+        .banner img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* dark tint, shared with .half-banner */
+        .banner::after,
+        .half-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .2);
+            pointer-events: none;
+        }
+
+        /* centred text block, shared with .half-banner */
+        .copy {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .copy h6 {
+            margin-bottom: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .copy h2 {
+            margin-bottom: 36px;
+            font-family: var(--font-head);
+            font-size: clamp(34px, 6vmin, 76px);
+            font-weight: 500;
+            letter-spacing: .06em;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .copy h2.cap {
+            font-weight: 400;
+            letter-spacing: .03em;
+            text-transform: capitalize;
+        }
+
+        .copy h3 {
+            margin-bottom: 32px;
+            font-family: var(--font-head);
+            font-size: clamp(26px, 3.2vw, 46px);
+            font-weight: 400;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 991.98px) {
+            .banner {
+                aspect-ratio: 100 / 126.5;
+            }
+        }
+    </style>
+
+    <!-- 5) HTML -->
+    <section class="banner-wrap">
+        <article class="banner">
+            <!-- your original had an empty image here, so it shows the grey background.
+                 To add a picture, put this inside the article:
+                 <picture><img src="./img/solis.jpg" alt="" loading="lazy"></picture> -->
+            <div class="copy">
+                <h6>ALL-NEW SOLIS SERIES</h6>
+                <h2>SHAPED BY PERFORMANCE</h2>
+                <a href="#" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER NOW</a>
+            </div>
+        </article>
+    </section>
+
+    <!-- 5) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 6 : PRODUCTS - "Made for Compact Spaces" (fans)
+         (uses the product style from SECTION 4)
+         ===================================================================== -->
+
+    <!-- 6) STYLE -->
+    <!-- no new style (uses SECTION 4) -->
+
+    <!-- 6) HTML -->
+    <section class="product-section">
+        <article class="sec-head">
+            <h4>Made for Compact Spaces</h4>
+        </article>
+
+        <article class="product-wrap">
+            <div class="row g-1">
+
+                <!-- SOLIS 40 - 40HSEF-D (1) -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-20">
+                            <img src="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=1000&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSEF-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=1000&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSEF-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SOLIS 40 - 40HSEF-D (2) -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-20">
+                            <img src="https://images.pexels.com/photos/7601161/pexels-photo-7601161.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=1000&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSEF-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/3935353/pexels-photo-3935353.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=1000&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSEF-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SOLIS 40 - 40HSEF-D (3) -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-20">
+                            <img src="https://images.pexels.com/photos/3935316/pexels-photo-3935316.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=1000&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSEF-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/37184143/pexels-photo-37184143.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=1000&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSEF-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SOLIS 40 - 40HSE-D (wide, half width) -->
+                <div class="col-12 col-sm-6">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-10">
+                            <img src="https://images.pexels.com/photos/7027790/pexels-photo-7027790.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=625&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSE-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=625&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSE-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SOLIS 40 - 40HSE-D (wide, half width) -->
+                <div class="col-12 col-sm-6">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-10">
+                            <img src="https://images.pexels.com/photos/3990590/pexels-photo-3990590.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=625&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSE-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/3958953/pexels-photo-3958953.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=625&amp;fit=crop"
+                                alt="SOLIS 40" loading="lazy">
+                            <div class="product-info">
+                                <h6>SOLIS 40</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>40HSE-D</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </article>
+    </section>
+
+    <!-- 6) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 7 : BANNER - Belo  (uses the banner style from SECTION 5)
+         ===================================================================== -->
+
+    <!-- 7) STYLE -->
+    <!-- no new style (uses SECTION 5) -->
+
+    <!-- 7) HTML -->
+    <section class="banner-wrap">
+        <article class="banner">
+            <picture>
+                <source media="(max-width: 991.98px)" srcset="./img/fan-one.jpeg">
+                <img src="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
+                    alt="" loading="lazy">
+            </picture>
+            <div class="copy">
+                <h6>PORTABLE LIGHT</h6>
+                <h2>BELO<br>LIGHT THAT MOVES<br>WITH YOU</h2>
+                <a href="#" class="btn btn-outline-light rounded-0 btn-cta">LEARN MORE</a>
+            </div>
+        </article>
+    </section>
+
+    <!-- 7) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 8 : PRODUCTS - "Made for Compact Spaces" (belo)
+         (uses the product style from SECTION 4)
+         ===================================================================== -->
+
+    <!-- 8) STYLE -->
+    <!-- no new style (uses SECTION 4) -->
+
+    <!-- 8) HTML -->
+    <section class="product-section">
+        <article class="sec-head">
+            <h4>Made for Compact Spaces</h4>
+        </article>
+
+        <article class="product-wrap">
+            <div class="row g-1">
+
+                <!-- BELO (square, half width) -->
+                <div class="col-12 col-sm-6">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-16">
+                            <img src="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/7601161/pexels-photo-7601161.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- BELO (square, half width) -->
+                <div class="col-12 col-sm-6">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-16">
+                            <img src="https://images.pexels.com/photos/3958953/pexels-photo-3958953.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/12689254/pexels-photo-12689254.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="BELO" loading="lazy">
+                            <div class="product-info">
+                                <h6>BELO</h6>
+                                <h6>USD 300</h6>
+                                <dl class="product-detail">
+                                    <dt>KB02-A</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </article>
+    </section>
+
+    <!-- 8) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 9 : SPLIT BANNERS (two half-width banners side by side)
+         ===================================================================== -->
+
+    <!-- 9) STYLE -->
+    <style>
+        .split {
+            position: relative;
+            z-index: 2;
+            background: var(--paper);
+            padding-top: var(--gap);
+            overflow: hidden;
+            /* clips the row's negative gutter margins -> no sideways gap */
+        }
+
+        .half-banner {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .half-banner>img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
+    <!-- 9) HTML -->
+    <section class="split">
+        <div class="row g-1">
+
+            <div class="col-12 col-lg-6">
+                <div class="half-banner">
+                    <img src="https://images.pexels.com/photos/12689254/pexels-photo-12689254.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop"
+                        alt="Where Light Takes Form" loading="lazy">
+                    <div class="copy">
+                        <h6>OUR PRODUCTION</h6>
+                        <h3>Where Light Takes Form</h3>
+                        <a href="#" class="btn btn-outline-light rounded-0 btn-cta">READ MORE</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="half-banner">
+                    <img src="https://images.pexels.com/photos/3935316/pexels-photo-3935316.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop"
+                        alt="The Expression of Wood" loading="lazy">
+                    <div class="copy">
+                        <h6>CRAFTSMANSHIP</h6>
+                        <h3>The Expression of Wood</h3>
+                        <a href="#" class="btn btn-outline-light rounded-0 btn-cta">DISCOVER MORE</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 9) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 10 : PRODUCTS - "Natural Texture, Muted Grey"
+         (uses the product style from SECTION 4)
+         ===================================================================== -->
+
+    <!-- 10) STYLE -->
+    <!-- no new style (uses SECTION 4) -->
+
+    <!-- 10) HTML -->
+    <section class="product-section">
+        <article class="sec-head">
+            <h4>Natural Texture, Muted Grey</h4>
+        </article>
+
+        <article class="product-wrap">
+            <div class="row g-1">
+
+                <!-- WOODIE 50 -->
+                <div class="col-12 col-sm-6">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-16">
+                            <img src="https://images.pexels.com/photos/38697833/pexels-photo-38697833.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="WOODIE 50" loading="lazy">
+                            <div class="product-info">
+                                <h6>WOODIE 50</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>50HSDF</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/3935316/pexels-photo-3935316.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="WOODIE 50" loading="lazy">
+                            <div class="product-info">
+                                <h6>WOODIE 50</h6>
+                                <h6>USD 850</h6>
+                                <dl class="product-detail">
+                                    <dt>50HSDF</dt>
+                                    <dd><span class="dot-brown"></span><span class="dot-tan"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- PADERA 60 -->
+                <div class="col-12 col-sm-6">
+                    <a class="product" href="#">
+                        <div class="product-face is-front r-16-16">
+                            <img src="https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="PADERA 60" loading="lazy">
+                            <div class="product-info">
+                                <h6>PADERA 60</h6>
+                                <h6>USD 900</h6>
+                                <dl class="product-detail">
+                                    <dt>60LP31-L</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-face is-back">
+                            <img src="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                                alt="PADERA 60" loading="lazy">
+                            <div class="product-info">
+                                <h6>PADERA 60</h6>
+                                <h6>USD 900</h6>
+                                <dl class="product-detail">
+                                    <dt>60LP31-L</dt>
+                                    <dd><span class="dot-black"></span><span class="dot-grey"></span><span
+                                            class="dot-white"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </article>
+    </section>
+
+    <!-- 10) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 11 : BANNER - Company story  (uses the banner style from SECTION 5)
+         ===================================================================== -->
+
+    <!-- 11) STYLE -->
+    <!-- no new style (uses SECTION 5) -->
+
+    <!-- 11) HTML -->
+    <section class="banner-wrap">
+        <article class="banner">
+            <picture>
+                <source media="(max-width: 991.98px)"
+                    srcset="https://images.pexels.com/photos/7601158/pexels-photo-7601158.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1265&amp;fit=crop">
+                <img src="https://images.pexels.com/photos/7601158/pexels-photo-7601158.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920&amp;h=1080&amp;fit=crop"
+                    alt="" loading="lazy">
+            </picture>
+            <div class="copy">
+                <h6>COMPANY STORY</h6>
+                <h2 class="cap">discover<br>Aurelle story</h2>
+                <a href="#" class="btn btn-outline-light rounded-0 btn-cta">EXPLORE</a>
+            </div>
+        </article>
+    </section>
+
+    <!-- 11) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 12 : LARGE FOOTER
+         ===================================================================== -->
+
+    <!-- 12) STYLE -->
+    <style>
+        .big-footer {
+            position: relative;
+            z-index: 2;
+            padding: 96px 28px 0;
+            background: var(--ink);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .big-footer-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .bf-lead {
+            max-width: 12em;
+            margin-bottom: 36px;
+            font-family: var(--font-head);
+            font-size: clamp(30px, 3.6vw, 56px);
+            font-weight: 300;
+            line-height: 1.12;
+        }
+
+        .bf-news {
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            max-width: 460px;
+        }
+
+        .bf-news .form-control {
+            flex: 1;
+            min-width: 0;
+            padding: 12px 0;
+            border: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .5);
+            border-radius: 0;
+            background: transparent;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .bf-news .form-control::placeholder {
+            color: rgba(255, 255, 255, .55);
+        }
+
+        .bf-news .form-control:focus {
+            border-bottom-color: #fff;
+            background: transparent;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .bf-title {
+            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            opacity: .55;
+        }
+
+        .bf-links a {
+            display: block;
+            padding: 5px 0;
+            font-size: 15px;
+            transition: opacity .2s;
+        }
+
+        .bf-links a:hover {
+            opacity: .55;
+        }
+
+        .bf-contact {
+            margin-top: 56px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, .18);
+            font-size: 14px;
+        }
+
+        .bf-contact p {
+            opacity: .75;
+        }
+
+        .bf-contact a {
+            font-size: clamp(20px, 2vw, 28px);
+            font-weight: 300;
+        }
+
+        .bf-wordmark {
+            margin: 56px 0 -.12em;
+            font-size: clamp(44px, 14vw, 280px);
+            font-weight: 300;
+            letter-spacing: .08em;
+            text-indent: .08em;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, .12);
+            user-select: none;
+        }
+
+        @media (max-width: 991.98px) {
+            .big-footer {
+                padding: 64px 16px 0;
             }
 
             .bf-contact {
-                margin-top: 56px;
-                padding-top: 28px;
-                border-top: 1px solid rgba(255, 255, 255, .18);
-                font-size: 14px;
-            }
-
-            .bf-contact p {
-                opacity: .75;
-            }
-
-            .bf-contact a {
-                font-size: clamp(20px, 2vw, 28px);
-                font-weight: 300;
+                margin-top: 40px;
             }
 
             .bf-wordmark {
-                margin: 56px 0 -.12em;
-                font-size: clamp(44px, 14vw, 280px);
-                font-weight: 300;
-                letter-spacing: .08em;
-                text-indent: .08em;
-                line-height: 1;
-                text-align: center;
-                white-space: nowrap;
-                color: rgba(255, 255, 255, .12);
-                user-select: none;
+                margin-top: 40px;
             }
+        }
+    </style>
 
-            @media (max-width: 991.98px) {
-                .big-footer {
-                    padding: 64px 16px 0;
-                }
+    <!-- 12) HTML -->
+    <footer class="big-footer">
+        <div class="big-footer-inner">
+            <div class="row g-5">
+                <div class="col-12 col-lg-5">
+                    <h2 class="bf-lead">Soft light. Quiet air. Made to last.</h2>
+                    <form class="bf-news" onsubmit="event.preventDefault()">
+                        <input type="email" class="form-control" placeholder="Your email address"
+                            aria-label="Email address" required>
+                        <button type="submit" class="btn btn-outline-light rounded-0 btn-cta">Subscribe</button>
+                    </form>
+                </div>
 
-                .bf-contact {
-                    margin-top: 40px;
-                }
-
-                .bf-wordmark {
-                    margin-top: 40px;
-                }
-            }
-        </style>
-
-        <footer class="big-footer">
-            <div class="big-footer-inner">
-                <div class="row g-5">
-                    <div class="col-12 col-lg-5">
-                        <h2 class="bf-lead">Soft light. Quiet air. Made to last.</h2>
-                        <form class="bf-news" onsubmit="event.preventDefault()">
-                            <input type="email" class="form-control" placeholder="Your email address"
-                                aria-label="Email address" required>
-                            <button type="submit" class="btn btn-outline-light rounded-0 btn-cta">Subscribe</button>
-                        </form>
-                    </div>
-
-                    <div class="col-12 col-lg-7">
-                        <div class="row g-4 bf-links">
-                            <div class="col-6 col-md-3">
-                                <h6 class="bf-title">Fans</h6>
-                                <a href="#">Solis</a>
-                                <a href="#">Woodie</a>
-                                <a href="#">Tube</a>
-                                <a href="#">Contemporary</a>
-                                <a href="#">Signature</a>
-                                <a href="#">Aeratron</a>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <h6 class="bf-title">Lighting</h6>
-                                <a href="#">Belo</a>
-                                <a href="#">Ensō</a>
-                                <a href="#">New collections</a>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <h6 class="bf-title">Company</h6>
-                                <a href="#">Story</a>
-                                <a href="#">Journal</a>
-                                <a href="#">Contact</a>
-                                <a href="#">Where to buy</a>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <h6 class="bf-title">Support</h6>
-                                <a href="#">Warranty registration</a>
-                                <a href="#">Catalogues</a>
-                                <a href="#">FAQ</a>
-                                <a href="#">Terms And Conditions</a>
-                            </div>
+                <div class="col-12 col-lg-7">
+                    <div class="row g-4 bf-links">
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Fans</h6>
+                            <a href="#">Solis</a>
+                            <a href="#">Woodie</a>
+                            <a href="#">Tube</a>
+                            <a href="#">Contemporary</a>
+                            <a href="#">Signature</a>
+                            <a href="#">Aeratron</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Lighting</h6>
+                            <a href="#">Belo</a>
+                            <a href="#">Ensō</a>
+                            <a href="#">New collections</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Company</h6>
+                            <a href="#">Story</a>
+                            <a href="#">Journal</a>
+                            <a href="#">Contact</a>
+                            <a href="#">Where to buy</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Support</h6>
+                            <a href="#">Warranty registration</a>
+                            <a href="#">Catalogues</a>
+                            <a href="#">FAQ</a>
+                            <a href="#">Terms And Conditions</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="bf-contact d-flex flex-column flex-md-row justify-content-between gap-3">
-                    <div>
-                        <p>Questions about a product or an order?</p>
-                        <a href="mailto:hello@example.com">hello@example.com</a>
-                    </div>
-                    <div class="text-md-end">
-                        <p>Showroom hours</p>
-                        <p>Mon – Sat, 10:00 – 18:00</p>
-                    </div>
-                </div>
-
-                <div class="bf-wordmark" aria-hidden="true">AURELLE</div>
             </div>
-        </footer>
 
-        <!-- ============================================================
-             10. FOOTER BAR (copyright strip)
-             ============================================================ -->
-        <style>
+            <div class="bf-contact d-flex flex-column flex-md-row justify-content-between gap-3">
+                <div>
+                    <p>Questions about a product or an order?</p>
+                    <a href="mailto:hello@example.com">hello@example.com</a>
+                </div>
+                <div class="text-md-end">
+                    <p>Showroom hours</p>
+                    <p>Mon – Sat, 10:00 – 18:00</p>
+                </div>
+            </div>
+
+            <div class="bf-wordmark" aria-hidden="true">AURELLE</div>
+        </div>
+    </footer>
+
+    <!-- 12) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 13 : FOOTER BAR (copyright strip)
+         ===================================================================== -->
+
+    <!-- 13) STYLE -->
+    <style>
+        .site-footer {
+            position: relative;
+            z-index: 2;
+            padding: 22px 40px;
+            background: var(--light);
+        }
+
+        .foot-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            font-size: 13px;
+        }
+
+        .foot-row h6 {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .foot-links {
+            display: flex;
+            gap: 40px;
+            margin: 0 auto 0 24px;
+            font-weight: 700;
+        }
+
+        .foot-links.right {
+            margin: 0;
+        }
+
+        .foot-links a:hover {
+            opacity: .55;
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .socials a {
+            display: grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--ink);
+            border-radius: 50%;
+            font-size: 11px;
+        }
+
+        .socials a:hover {
+            background: var(--ink);
+            color: #fff;
+        }
+
+        @media (max-width: 991.98px) {
             .site-footer {
-                position: relative;
-                z-index: 2;
-                padding: 22px 40px;
-                background: var(--light);
+                padding: 20px;
             }
 
-            .foot-row {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: space-between;
-                gap: 18px;
-                font-size: 13px;
-            }
-
-            .foot-row h6 {
-                font-size: 13px;
-                font-weight: 700;
-            }
-
-            .foot-links {
-                display: flex;
-                gap: 40px;
-                margin: 0 auto 0 24px;
-                font-weight: 700;
-            }
-
+            .foot-links,
             .foot-links.right {
+                width: 100%;
                 margin: 0;
+                gap: 24px;
             }
+        }
+    </style>
 
-            .foot-links a:hover {
-                opacity: .55;
-            }
-
-            .socials {
-                display: flex;
-                gap: 12px;
-            }
-
-            .socials a {
-                display: grid;
-                place-items: center;
-                width: 28px;
-                height: 28px;
-                border: 1px solid var(--ink);
-                border-radius: 50%;
-                font-size: 11px;
-            }
-
-            .socials a:hover {
-                background: var(--ink);
-                color: #fff;
-            }
-
-            @media (max-width: 991.98px) {
-                .site-footer {
-                    padding: 20px;
-                }
-
-                .foot-links,
-                .foot-links.right {
-                    width: 100%;
-                    margin: 0;
-                    gap: 24px;
-                }
-            }
-        </style>
-
-        <div class="site-footer">
-            <div class="foot-row">
-                <h6>Copyright &copy; Aurelle 2026</h6>
-                <div class="foot-links">
-                    <a href="#">Terms And Conditions</a>
-                    <a href="#">FAQ</a>
-                </div>
-                <div class="foot-links right">
-                    <a href="#">Contact</a>
-                    <a href="#">Newsletter</a>
-                    <a href="#">Catalogues</a>
-                </div>
-                <div class="socials">
-                    <a href="#" aria-label="LINE">L</a>
-                    <a href="#" aria-label="Instagram">Ig</a>
-                    <a href="#" aria-label="Facebook">Fb</a>
-                </div>
+    <!-- 13) HTML -->
+    <div class="site-footer">
+        <div class="foot-row">
+            <h6>Copyright &copy; Aurelle 2026</h6>
+            <div class="foot-links">
+                <a href="#">Terms And Conditions</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="foot-links right">
+                <a href="#">Contact</a>
+                <a href="#">Newsletter</a>
+                <a href="#">Catalogues</a>
+            </div>
+            <div class="socials">
+                <a href="#" aria-label="LINE">L</a>
+                <a href="#" aria-label="Instagram">Ig</a>
+                <a href="#" aria-label="Facebook">Fb</a>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================
-         11. BACK TO TOP
-         ============================================================ -->
+    <!-- 13) SCRIPT -->
+    <!-- no script needed -->
+
+
+
+
+    <!-- =====================================================================
+         SECTION 14 : BACK TO TOP BUTTON
+         ===================================================================== -->
+
+    <!-- 14) STYLE -->
     <style>
         #top {
             position: fixed;
@@ -1538,123 +2123,34 @@
         }
     </style>
 
-    <a href="#page" id="top" aria-label="Back to top">&uarr;</a>
+    <!-- 14) HTML -->
+    <a href="#" id="top" aria-label="Back to top">&uarr;</a>
 
-    <!-- ============================================================
-         SCRIPTS
-         ============================================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 14) SCRIPT -->
     <script>
-        /* ---------- Helpers ---------- */
-        const $ = (sel, root = document) => root.querySelector(sel);
-        const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+        (function () {
+            var topBtn = document.getElementById("top");
 
-        /* ---------- Demo media (Pexels, free to use) ---------- */
-        const px = (id, w, h) =>
-            `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}&h=${h}&fit=crop`;
-
-        /* ---------- Products (in Laravel: @foreach over the Product model, one Blade partial per card) ---------- */
-        const FINISH_WALNUT = ["#5e3f29", "#d1a56f", "#fbfbf9"];
-        const FINISH_MODERN = ["#1f1f1f", "#8b8d8f", "#fbfbf9"];
-        const SIZES = { "16/20": [800, 1000], "16/10": [1000, 625], "16/16": [800, 800] };
-
-        /* front / back = Pexels photo ids */
-        const product = (front, back, name, price, code, colors, extra = {}) => {
-            const ratio = extra.ratio || "16/20";
-            const [w, h] = SIZES[ratio];
-            return { href: "#", name, price, code, colors, ratio, front: px(front, w, h), back: px(back, w, h), ...extra };
-        };
-
-        const PRODUCTS = {
-            lights: [
-                product(12689254, 38697833, "BELO", "USD 300", "KB02-A", FINISH_WALNUT),
-                product(38697833, 7601158, "BELO", "USD 300", "KB02-A", FINISH_WALNUT),
-                product(7601158, 12689254, "BELO", "USD 300", "KB02-A", FINISH_WALNUT)
-            ],
-            fans: [
-                product(7601104, 3958956, "SOLIS 40", "USD 850", "40HSEF-D", FINISH_MODERN),
-                product(7601161, 3935353, "SOLIS 40", "USD 850", "40HSEF-D", FINISH_MODERN),
-                product(3935316, 37184143, "SOLIS 40", "USD 850", "40HSEF-D", FINISH_MODERN),
-                product(7027790, 8951851, "SOLIS 40", "USD 850", "40HSE-D", FINISH_MODERN, { ratio: "16/10", half: true }),
-                product(3990590, 3958953, "SOLIS 40", "USD 850", "40HSE-D", FINISH_MODERN, { ratio: "16/10", half: true })
-            ],
-            belo: [
-                product(8951851, 7601161, "BELO", "USD 300", "KB02-A", FINISH_WALNUT, { ratio: "16/16", half: true }),
-                product(3958953, 12689254, "BELO", "USD 300", "KB02-A", FINISH_WALNUT, { ratio: "16/16", half: true })
-            ],
-            texture: [
-                product(38697833, 3935316, "WOODIE 50", "USD 850", "50HSDF", FINISH_WALNUT, { ratio: "16/16", half: true }),
-                product(3958956, 7601104, "PADERA 60", "USD 900", "60LP31-L", FINISH_MODERN, { ratio: "16/16", half: true })
-            ]
-        };
-
-        function productFace(p, src, side) {
-            const swatches = p.colors.map(c => `<span style="background:${c}"></span>`).join("");
-            return `
-                <div class="product-face is-${side}" ${side === "front" ? `style="aspect-ratio:${p.ratio}"` : ""}>
-                    <img src="${src}" alt="${p.name}" loading="lazy">
-                    <div class="product-info">
-                        <h6>${p.name}</h6>
-                        <h6>${p.price}</h6>
-                        <dl class="product-detail"><dt>${p.code}</dt><dd>${swatches}</dd></dl>
-                    </div>
-                </div>`;
-        }
-
-        function productCard(p) {
-            const cols = p.half ? "col-12 col-sm-6" : "col-12 col-sm-6 col-lg-4";
-            return `
-                <div class="${cols}">
-                    <a class="product" href="${p.href}">
-                        ${productFace(p, p.front, "front")}
-                        ${productFace(p, p.back, "back")}
-                    </a>
-                </div>`;
-        }
-
-        $$("[data-products]").forEach(el => {
-            el.innerHTML = (PRODUCTS[el.dataset.products] || []).map(productCard).join("");
-        });
-
-        /* ---------- Back to top ---------- */
-        const topBtn = $("#top");
-
-        function onScroll() {
-            topBtn.style.display = window.scrollY > window.innerHeight / 1.5 ? "grid" : "none";
-        }
-        window.addEventListener("scroll", onScroll, { passive: true });
-        onScroll();
-
-        topBtn.addEventListener("click", e => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        /* ---------- Video: Pexels demo clips (desktop 16:9, mobile 9:16) ---------- */
-        const VIDEOS = {
-            desktop: {
-                src: "https://videos.pexels.com/video-files/34586520/14656246_2560_1440_30fps.mp4",
-                poster: "https://images.pexels.com/videos/34586520/pexels-photo-34586520.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
-            },
-            mobile: {
-                src: "https://videos.pexels.com/video-files/29624123/12747656_1440_2560_30fps.mp4",
-                poster: "https://images.pexels.com/videos/29624123/pexels-photo-29624123.jpeg?auto=compress&cs=tinysrgb&w=900&h=1600&fit=crop"
+            // show the button after scrolling down a little
+            function showHide() {
+                topBtn.style.display = window.scrollY > window.innerHeight / 1.5 ? "grid" : "none";
             }
-        };
-        const heroVideo = $("#heroVideo");
-        const mqMobile = window.matchMedia("(max-width: 991.98px)");
+            window.addEventListener("scroll", showHide, { passive: true });
+            showHide();
 
-        function setVideo() {
-            const key = mqMobile.matches ? "mobile" : "desktop";
-            if (heroVideo.dataset.clip === key) return;
-            heroVideo.dataset.clip = key;
-            heroVideo.poster = VIDEOS[key].poster;
-            heroVideo.src = VIDEOS[key].src;
-            heroVideo.play().catch(() => { });
-        }
-        setVideo();
-        mqMobile.addEventListener("change", setVideo);
+            // smooth scroll to the top
+            topBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        })();
     </script>
+
+
+
+
+    <!-- Bootstrap JS (needed for nothing visual here, but keeps Bootstrap components available) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
