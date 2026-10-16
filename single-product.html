@@ -101,13 +101,9 @@
 <body>
 
 
-    <!-- =====================================================================
-         SECTION 1 : HEADER  (copied from index.html)
-         + Fans / Lighting full-screen menus + Country overlay
-         The header has data-solid so it is always white on this page.
-         ===================================================================== -->
 
-    <!-- 1) STYLE -->
+
+
     <style>
         /* ---------- scoped base (so the component looks the same on any page) ---------- */
         .site-header,
@@ -516,8 +512,7 @@
         }
     </style>
 
-    <!-- 1) HTML -->
-    <!-- header bar (data-solid = always white, because this page has no dark hero) -->
+
     <header class="site-header is-solid" id="header" data-solid>
         <a href="index.html" class="hd-logo" aria-label="Aurelle home">AURELLE</a>
 
@@ -709,14 +704,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <main class="pd-main">
 
-        <!-- =====================================================================
-             SECTION 2 : PRODUCT TOP  (image slider on the left, product info on the right)
-             Desktop: side by side.  Tablet / mobile: slider first, info below.
-             ===================================================================== -->
 
-        <!-- 2) STYLE -->
         <style>
             /* the header is fixed, so the page starts below it */
             .pd-main {
@@ -964,8 +979,7 @@
             }
         </style>
 
-        <!-- 2) HTML -->
-        <!-- placeholder images: replace every src with your own photo -->
+
         <section class="pd-top">
             <div class="container-fluid p-0">
                 <div class="row g-0">
@@ -1050,7 +1064,7 @@
             </div>
         </section>
 
-        <!-- 2) SCRIPT : slider + colour picker -->
+
         <script>
             (function () {
                 /* ----- image slider ----- */
@@ -1095,11 +1109,7 @@
 
 
 
-        <!-- =====================================================================
-             SECTION 3 : DAY / NIGHT SLIDER  (drag the bar to change the picture)
-             ===================================================================== -->
 
-        <!-- 3) STYLE -->
         <style>
             .dn {
                 padding: 48px 0;
@@ -1230,11 +1240,7 @@
 
 
 
-        <!-- =====================================================================
-             SECTION 4 : VIDEO
-             ===================================================================== -->
 
-        <!-- 4) STYLE -->
         <style>
             .pd-video {
                 background: var(--paper);
@@ -1269,17 +1275,7 @@
             </div>
         </section>
 
-        <!-- 4) SCRIPT -->
-        <!-- no script needed -->
 
-
-
-
-        <!-- =====================================================================
-             SECTION 5 : INSPIRE (centred text + wide picture)
-             ===================================================================== -->
-
-        <!-- 5) STYLE -->
         <style>
             .inspire {
                 padding: 64px 16px 56px;
@@ -1362,17 +1358,7 @@
             </div>
         </section>
 
-        <!-- 5) SCRIPT -->
-        <!-- no script needed -->
 
-
-
-
-        <!-- =====================================================================
-             SECTION 6 : TWO PICTURES (one sits lower than the other) - used twice
-             ===================================================================== -->
-
-        <!-- 6) STYLE -->
         <style>
             .duo {
                 padding: 24px 16px 40px;
@@ -1435,17 +1421,7 @@
             </div>
         </section>
 
-        <!-- 6) SCRIPT -->
-        <!-- no script needed -->
 
-
-
-
-        <!-- =====================================================================
-             SECTION 7 : DETAIL DESIGN (text + picture, switch with arrows / dots / swipe)
-             ===================================================================== -->
-
-        <!-- 7) STYLE -->
         <style>
             .feature {
                 padding: 48px 16px 64px;
@@ -1630,14 +1606,7 @@
 
 
 
-        <!-- =====================================================================
-             SECTION 8 : TWO PICTURES again (mirrored)  (uses the style from SECTION 6)
-             ===================================================================== -->
 
-        <!-- 8) STYLE -->
-        <!-- no new style (uses SECTION 6) -->
-
-        <!-- 8) HTML -->
         <section class="duo">
             <div class="duo-inner">
                 <div class="row g-4 g-lg-5 justify-content-between">
@@ -1659,17 +1628,17 @@
             </div>
         </section>
 
-        <!-- 8) SCRIPT -->
-        <!-- no script needed -->
 
 
 
 
-        <!-- =====================================================================
-             SECTION 9 : PRODUCT DETAILS (specification list + download buttons)
-             ===================================================================== -->
 
-        <!-- 9) STYLE -->
+
+
+
+
+
+
         <style>
             .spec {
                 padding: 56px 16px 64px;
@@ -1678,63 +1647,167 @@
             }
 
             .spec-inner {
-                max-width: 1200px;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 40px;
+                max-width: 1300px;
                 margin: 0 auto;
             }
 
-            .spec-title {
-                margin-bottom: 28px;
-                font-family: var(--font-head);
-                font-size: clamp(28px, 3.4vw, 44px);
-                font-weight: 400;
+            /* ----- left: title, picture, download ----- */
+            .spec-side {
+                align-self: start;
             }
 
-            .spec dl {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 6px;
-                margin: 0;
-                padding: 22px 0;
-                border-top: 1px solid var(--line);
-            }
-
-            .spec dt {
+            .spec-eyebrow {
+                margin-bottom: 14px;
+                font-size: 13px;
                 font-weight: 500;
+                letter-spacing: .2em;
+                text-transform: uppercase;
+                opacity: .6;
             }
 
-            .spec dd {
-                margin: 0;
-                line-height: 1.9;
-                overflow-wrap: anywhere;
+            .spec-title {
+                font-family: var(--font-head);
+                font-size: clamp(32px, 3.6vw, 48px);
+                font-weight: 400;
+                line-height: 1.1;
+            }
+
+            .spec-title::after {
+                content: "";
+                display: block;
+                width: 56px;
+                height: 1px;
+                margin: 20px 0;
+                background: var(--ink);
+            }
+
+            .spec-model {
+                margin-bottom: 20px;
+                font-size: 13px;
+                font-weight: 500;
+                letter-spacing: .16em;
             }
 
             .spec-pic {
-                text-align: center;
+                margin-bottom: 24px;
+                aspect-ratio: 1 / 1;
+                overflow: hidden;
+                background: var(--light);
             }
 
             .spec-pic img {
-                max-width: 480px;
                 width: 100%;
-                margin: 18px auto 0;
-                background: var(--light);
-                aspect-ratio: 1 / 1;
+                height: 100%;
                 object-fit: cover;
             }
 
-            .spec-btns {
+            .spec-btns .btn {
+                width: 100%;
+            }
+
+            /* ----- right: spec groups ----- */
+            .spec-group {
+                padding: 26px 0;
+                border-top: 1px solid var(--ink);
+            }
+
+            .spec-group:last-child {
+                border-bottom: 1px solid var(--line);
+            }
+
+            .spec-label {
+                margin-bottom: 16px;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: .2em;
+                text-transform: uppercase;
+            }
+
+            .spec-sub {
+                margin: 18px 0 4px;
+                font-family: var(--font-head);
+                font-size: 17px;
+                font-weight: 500;
+            }
+
+            .spec-sub:first-child {
+                margin-top: 0;
+            }
+
+            .spec-row {
                 display: flex;
-                flex-wrap: wrap;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 24px;
+                padding: 10px 0;
+                border-bottom: 1px solid var(--line);
+                line-height: 1.5;
+            }
+
+            .spec-row:last-child {
+                border-bottom: 0;
+            }
+
+            .spec-row span:first-child {
+                color: rgba(17, 17, 17, .6);
+            }
+
+            .spec-row span:last-child {
+                font-weight: 500;
+                text-align: right;
+                overflow-wrap: anywhere;
+            }
+
+            .spec-note {
+                line-height: 1.8;
+                color: rgba(17, 17, 17, .8);
+            }
+
+            .spec-color {
+                display: flex;
+                align-items: center;
                 gap: 12px;
+                font-size: 18px;
+                font-family: var(--font-head);
+            }
+
+            .spec-color::before {
+                content: "";
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: var(--ink);
             }
 
             @media (min-width: 768px) {
                 .spec {
-                    padding: 96px 28px 96px;
+                    padding: 96px 28px;
+                }
+            }
+
+            @media (min-width: 992px) {
+                .spec-inner {
+                    grid-template-columns: 380px 1fr;
+                    gap: 96px;
                 }
 
-                .spec dl {
-                    grid-template-columns: 260px 1fr;
+                .spec-side {
+                    position: sticky;
+                    top: calc(var(--header-h) + 32px);
+                }
+
+                .spec-group {
+                    display: grid;
+                    grid-template-columns: 200px 1fr;
                     gap: 24px;
+                }
+
+                .spec-label {
+                    margin-bottom: 0;
+                    padding-top: 10px;
                 }
             }
         </style>
@@ -1742,68 +1815,103 @@
         <!-- 9) HTML -->
         <section class="spec" id="details">
             <div class="spec-inner">
-                <h2 class="spec-title">Product details</h2>
 
-                <dl class="spec-pic" style="display:block">
-                    <dt>BELO &nbsp; KB02-A</dt>
-                    <dd><img src="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
-                            alt="BELO dimensions" loading="lazy"></dd>
-                </dl>
+                <!-- left: sticky on desktop -->
+                <div class="spec-side">
+                    <h6 class="spec-eyebrow">Details</h6>
+                    <h2 class="spec-title">Product details</h2>
+                    <p class="spec-model">BELO &nbsp; KB02-A</p>
+                    <div class="spec-pic">
+                        <img src="https://images.pexels.com/photos/8951851/pexels-photo-8951851.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;h=800&amp;fit=crop"
+                            alt="BELO dimensions" loading="lazy">
+                    </div>
+                    <div class="spec-btns">
+                        <a href="#" class="btn btn-outline-dark rounded-0 btn-cta" download>Specification</a>
+                    </div>
+                </div>
 
-                <dl>
-                    <dt>Colour</dt>
-                    <dd id="specColor">Mushroom</dd>
-                </dl>
-                <dl>
-                    <dt>Materials</dt>
-                    <dd>Shade | Opal glass, acid-etched finish<br>Body | High-gloss powder-coated ABS</dd>
-                </dl>
-                <dl>
-                    <dt>Dimensions</dt>
-                    <dd>Height | 195 mm<br>Diameter | Ø130 mm<br>Weight | 580 g</dd>
-                </dl>
-                <dl>
-                    <dt>Specifications</dt>
-                    <dd>
-                        <b>Lamp</b><br>
-                        Environment | Indoor / Outdoor<br>
-                        Mounting | Portable<br>
-                        Power | 3 W<br>
-                        Colour temperature | 2700 K<br>
-                        IP rating | 44<br>
-                        Light source | LED, G4<br>
-                        Dimming | Stepless touch dimming<br>
-                        <b>Battery</b><br>
-                        Type | Li-ion 5000 mAh (built in)<br>
-                        Charging | USB-C
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>Things to know</dt>
-                    <dd>Please read the lighting FAQ for care and charging tips.</dd>
-                </dl>
-                <dl>
-                    <dt>Download</dt>
-                    <dd>
-                        <div class="spec-btns">
-                            <a href="#" class="btn btn-outline-dark rounded-0 btn-cta" download>Specification</a>
+                <!-- right: spec groups -->
+                <div class="spec-list">
+
+                    <div class="spec-group">
+                        <h3 class="spec-label">Colour</h3>
+                        <div class="spec-color"><span id="specColor">Mushroom</span></div>
+                    </div>
+
+                    <div class="spec-group">
+                        <h3 class="spec-label">Materials</h3>
+                        <div>
+                            <div class="spec-row"><span>Shade</span><span>Opal glass, acid-etched finish</span></div>
+                            <div class="spec-row"><span>Body</span><span>High-gloss powder-coated ABS</span></div>
                         </div>
-                    </dd>
-                </dl>
+                    </div>
+
+                    <div class="spec-group">
+                        <h3 class="spec-label">Dimensions</h3>
+                        <div>
+                            <div class="spec-row"><span>Height</span><span>195 mm</span></div>
+                            <div class="spec-row"><span>Diameter</span><span>Ø130 mm</span></div>
+                            <div class="spec-row"><span>Weight</span><span>580 g</span></div>
+                        </div>
+                    </div>
+
+                    <div class="spec-group">
+                        <h3 class="spec-label">Performance</h3>
+                        <div>
+                            <p class="spec-sub">DC Motor</p>
+                            <div class="spec-row"><span>Speed 1</span><span>2010 Fcm | 4.0 W</span></div>
+                            <div class="spec-row"><span>Speed 2</span><span>2010 Fcm | 4.0 W</span></div>
+                            <div class="spec-row"><span>Speed 3</span><span>2010 Fcm | 4.0 W</span></div>
+                            <div class="spec-row"><span>Speed 4</span><span>2010 Fcm | 4.0 W</span></div>
+                            <div class="spec-row"><span>Speed 5</span><span>2010 Fcm | 4.0 W</span></div>
+                            <div class="spec-row"><span>Speed 6</span><span>2010 Fcm | 4.0 W</span></div>
+                            <div class="spec-row"><span>Speed 7</span><span>2010 Fcm | 4.0 W</span></div>
+                        </div>
+                    </div>
+
+                    <div class="spec-group">
+                        <h3 class="spec-label">Specifications</h3>
+                        <div>
+                            <p class="spec-sub">Lamp</p>
+                            <div class="spec-row"><span>Environment</span><span>Indoor / Outdoor</span></div>
+                            <div class="spec-row"><span>Mounting</span><span>Portable</span></div>
+                            <div class="spec-row"><span>Power</span><span>3 W</span></div>
+                            <div class="spec-row"><span>Colour temperature</span><span>2700 K</span></div>
+                            <div class="spec-row"><span>IP rating</span><span>44</span></div>
+                            <div class="spec-row"><span>Light source</span><span>LED, G4</span></div>
+                            <div class="spec-row"><span>Dimming</span><span>Stepless touch dimming</span></div>
+                            <p class="spec-sub">Battery</p>
+                            <div class="spec-row"><span>Type</span><span>Li-ion 5000 mAh (built in)</span></div>
+                            <div class="spec-row"><span>Charging</span><span>USB-C</span></div>
+                        </div>
+                    </div>
+
+                    <div class="spec-group">
+                        <h3 class="spec-label">Things to know</h3>
+                        <p class="spec-note">Please read the lighting FAQ for care and charging tips.</p>
+                    </div>
+
+                </div>
             </div>
         </section>
 
-        <!-- 9) SCRIPT -->
-        <!-- no script needed (the colour name above is changed by the SECTION 2 script) -->
 
 
 
 
-        <!-- =====================================================================
-             SECTION 10 : FIND YOUR SUITABLE MATCH (4 product cards, hover to swap picture)
-             ===================================================================== -->
 
-        <!-- 10) STYLE -->
+
+
+
+
+
+
+
+
+
+
+
+
         <style>
             .match {
                 padding: 8px 0 48px;
@@ -2097,11 +2205,29 @@
 
 
 
-    <!-- =====================================================================
-         SECTION 11 : LARGE FOOTER  (copied from index.html)
-         ===================================================================== -->
 
-    <!-- 11) STYLE -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <style>
         .big-footer {
             position: relative;
@@ -2220,7 +2346,7 @@
         }
     </style>
 
-    <!-- 11) HTML -->
+
     <footer class="big-footer">
         <div class="big-footer-inner">
             <div class="row g-5">
@@ -2283,17 +2409,7 @@
         </div>
     </footer>
 
-    <!-- 11) SCRIPT -->
-    <!-- no script needed -->
 
-
-
-
-    <!-- =====================================================================
-         SECTION 12 : FOOTER BAR (copyright strip, copied from index.html)
-         ===================================================================== -->
-
-    <!-- 12) STYLE -->
     <style>
         .site-footer {
             position: relative;
@@ -2386,17 +2502,11 @@
         </div>
     </div>
 
-    <!-- 12) SCRIPT -->
-    <!-- no script needed -->
 
 
 
 
-    <!-- =====================================================================
-         SECTION 13 : BACK TO TOP BUTTON (copied from index.html)
-         ===================================================================== -->
 
-    <!-- 13) STYLE -->
     <style>
         #top {
             position: fixed;
