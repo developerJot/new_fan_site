@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>All Products | Aurelle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #111;
+            --paper: #fff;
+            --light: #f5f5f5;
+            --line: rgba(0, 0, 0, .1);
+            --header-h: 64px;
+            --font: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            --font-head: Optima, Candara, "Segoe UI", "Helvetica Neue", Arial, sans-serif
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ink);
+            background: var(--paper);
+            overflow-x: hidden;
+            padding-top: var(--header-h)
+        }
+
+        body.no-scroll {
+            overflow: hidden
+        }
+
+        a,
+        a:hover {
+            color: inherit;
+            text-decoration: none
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        img {
+            display: block;
+            max-width: 100%
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0
+        }
+
+        .btn-cta {
+            padding: 14px 40px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .14em;
+            text-transform: uppercase
+        }
+
+        /* ===== HEADER (from index) ===== */
+        .site-header,
+        .mega,
+        .lang-frame {
+            font-size: 14px;
+            line-height: 1.6
+        }
+
+        .site-header *,
+        .mega *,
+        .lang-frame * {
+            box-sizing: border-box
+        }
+
+        .hd-logo {
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: .32em
+        }
+
+        .hd-btn {
+            padding: 0;
+            border: 0;
+            background: none;
+            color: inherit;
+            font: inherit
+        }
+
+        .hd-lang {
+            font-weight: 500;
+            letter-spacing: .08em
+        }
+
+        .hd-subscribe {
+            display: inline-block;
+            padding: 10px 24px;
+            border: 1px solid currentColor;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .14em;
+            text-transform: uppercase
+        }
+
+        .site-header {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--header-h);
+            padding: 0 28px;
+            background: var(--paper);
+            color: var(--ink);
+            box-shadow: 0 1px 0 var(--line)
+        }
+
+        .main-nav ul {
+            display: flex;
+            align-items: center;
+            gap: 2px
+        }
+
+        .main-nav li>a,
+        .main-nav li>button {
+            display: block;
+            padding: 10px 18px;
+            border: 0;
+            background: none;
+            color: inherit;
+            font: inherit;
+            font-weight: 500;
+            letter-spacing: .04em;
+            line-height: 1.25;
+            transition: opacity .2s
+        }
+
+        .main-nav li>a:hover,
+        .main-nav li>button:hover {
+            opacity: .6
+        }
+
+        .nav-news {
+            display: none
+        }
+
+        .header-tools {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .menu-toggle {
+            display: none;
+            position: relative;
+            width: 40px;
+            height: 40px
+        }
+
+        .menu-toggle span,
+        .menu-toggle::before,
+        .menu-toggle::after {
+            content: "";
+            position: absolute;
+            left: 9px;
+            right: 9px;
+            height: 1.5px;
+            background: currentColor;
+            transition: transform .25s, opacity .2s
+        }
+
+        .menu-toggle::before {
+            top: 13px
+        }
+
+        .menu-toggle span {
+            top: 19px
+        }
+
+        .menu-toggle::after {
+            top: 25px
+        }
+
+        .menu-open .menu-toggle::before {
+            transform: translateY(6px) rotate(45deg)
+        }
+
+        .menu-open .menu-toggle::after {
+            transform: translateY(-6px) rotate(-45deg)
+        }
+
+        .menu-open .menu-toggle span {
+            opacity: 0
+        }
+
+        .mega,
+        .lang-frame {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s, visibility .3s
+        }
+
+        .mega {
+            z-index: 60;
+            background: rgba(17, 17, 17, .96);
+            color: #fff
+        }
+
+        .lang-frame {
+            z-index: 70;
+            background: var(--paper);
+            color: var(--ink)
+        }
+
+        .mega.is-open,
+        .lang-frame.is-open {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .mega-top,
+        .lang-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--header-h);
+            padding: 0 28px
+        }
+
+        .mega-nav {
+            display: flex;
+            gap: 6px
+        }
+
+        .mega-nav a,
+        .mega-nav button {
+            padding: 8px 14px;
+            font-weight: 500
+        }
+
+        .mega-nav a:hover,
+        .mega-nav button:hover {
+            opacity: .6
+        }
+
+        .mega-right {
+            display: flex;
+            align-items: center;
+            gap: 22px
+        }
+
+        .mega-close {
+            font-size: 28px;
+            font-weight: 300;
+            line-height: 1
+        }
+
+        .mega-back {
+            display: none;
+            padding-bottom: 20px;
+            font-size: 13px;
+            letter-spacing: .1em
+        }
+
+        .mega-body {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 6vw
+        }
+
+        .prods-list li a {
+            display: block;
+            padding: 4px 0;
+            font-size: clamp(34px, 6vmin, 68px);
+            font-weight: 300;
+            line-height: 1.2;
+            transition: opacity .25s, padding-left .25s
+        }
+
+        .prods-list ul:hover li a {
+            opacity: .3
+        }
+
+        .prods-list ul li a:hover {
+            opacity: 1;
+            padding-left: 12px
+        }
+
+        .prods-list.small li a {
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: 400
+        }
+
+        .lang-menu {
+            align-self: center;
+            width: min(900px, 86vw);
+            margin: 0 auto
+        }
+
+        .lang-menu h4 {
+            margin-bottom: 28px;
+            font-size: 15px;
+            font-weight: 500
+        }
+
+        .lang-menu a {
+            display: block;
+            padding: 6px 0;
+            font-size: clamp(30px, 5vmin, 54px);
+            font-weight: 300
+        }
+
+        .lang-menu a:hover {
+            opacity: .5
+        }
+
+        @media(max-width:991.98px) {
+            .site-header {
+                padding: 0 16px
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 80
+            }
+
+            .main-nav {
+                position: fixed;
+                inset: 0;
+                z-index: 75;
+                padding: 100px 8vw 40px;
+                background: rgba(17, 17, 17, .97);
+                color: #fff;
+                overflow-y: auto;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity .3s, visibility .3s
+            }
+
+            .menu-open .main-nav {
+                opacity: 1;
+                visibility: visible
+            }
+
+            .menu-open .site-header {
+                background: transparent;
+                color: #fff;
+                box-shadow: none
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0
+            }
+
+            .main-nav li>a,
+            .main-nav li>button {
+                padding: 8px 0;
+                font-size: 32px;
+                font-weight: 300;
+                text-align: left
+            }
+
+            .nav-news {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 40px
+            }
+
+            .mega-top,
+            .lang-top {
+                padding: 0 16px
+            }
+
+            .mega-nav {
+                display: none
+            }
+
+            .mega-back {
+                display: block
+            }
+
+            .mega-body {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                align-content: center;
+                padding: 0 8vw
+            }
+        }
+
+        /* ===== PRODUCTS PAGE ===== */
+        .shop {
+            display: flex;
+            align-items: flex-start;
+            background: var(--paper)
+        }
+
+        .side {
+            position: sticky;
+            top: var(--header-h);
+            flex: 0 0 19%;
+            min-width: 250px;
+            height: calc(100vh - var(--header-h));
+            padding: 44px 0 44px 44px;
+            background: #f8f9fb;
+            overflow-y: auto
+        }
+
+        .side h1 {
+            margin: 0 0 44px;
+            font-size: 27px;
+            font-weight: 600;
+            letter-spacing: .02em;
+            text-transform: uppercase
+        }
+
+        .side h1 a {
+            position: relative;
+            display: inline-block;
+            /* padding-left: 20px; */
+            color: var(--ink)
+        }
+
+        /* .side h1 a::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 9px;
+            height: 9px;
+            margin-top: -4.5px;
+            border-radius: 50%;
+            background: var(--ink)
+        } */
+
+        .side li a {
+            display: block;
+            padding: 5px 0;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: .01em;
+            color: #8b8d8f;
+            transition: color .2s, padding-left .25s
+        }
+
+        .side li a:hover,
+        .side li a.active {
+            color: var(--ink);
+            padding-left: 10px
+        }
+
+        .side .new {
+            margin-top: 44px
+        }
+
+        .side .new a {
+            display: block;
+            padding: 8px 0;
+            color: var(--ink);
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: .01em;
+            transition: padding-left .25s
+        }
+
+        .side .new a:hover {
+            padding-left: 10px
+        }
+
+        .grid-area {
+            flex: 1;
+            min-width: 0;
+            background: var(--paper);
+            overflow: hidden
+        }
+
+        .grid-area .row {
+            margin: 0
+        }
+
+        .product {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            background: var(--light);
+            aspect-ratio: 4/5
+        }
+
+        .product.wide {
+            aspect-ratio: 4/5
+        }
+
+        .pf {
+            position: absolute;
+            inset: 0;
+            transition: opacity .6s ease
+        }
+
+        .pf>img,
+        .pf>video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .pf.is-back {
+            opacity: 0
+        }
+
+        .product:hover .is-front,
+        .product:focus-visible .is-front {
+            opacity: 0
+        }
+
+        .product:hover .is-back,
+        .product:focus-visible .is-back {
+            opacity: 1
+        }
+
+        /* video cards: no hover effect, video always stays visible */
+        .product.is-video:hover .is-front,
+        .product.is-video:focus-visible .is-front {
+            opacity: 1
+        }
+
+        .pi {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            padding: 20px 22px;
+            color: #333;
+            pointer-events: none;
+            transition: color .5s
+        }
+
+        .pn {
+            display: block;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: .04em;
+            line-height: 1.5;
+            text-transform: uppercase
+        }
+
+        .pn small {
+            display: block;
+            font-size: 13px;
+            color: #c9c9c9;
+            transition: color .5s
+        }
+
+        .pcode {
+            position: absolute;
+            left: 22px;
+            bottom: 18px;
+            font-size: 13px;
+            letter-spacing: .04em;
+            color: #c9c9c9;
+            transition: color .5s
+        }
+
+        .dots {
+            position: absolute;
+            right: 22px;
+            bottom: 21px;
+            display: flex;
+            gap: 7px
+        }
+
+        .dots b {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, .25)
+        }
+
+        .product:hover .pi,
+        .product:hover .pn small,
+        .product:hover .pcode {
+            color: #fff
+        }
+
+        .product:hover .dots b {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .85)
+        }
+
+        .dot-brown {
+            background: #5e3f29
+        }
+
+        .dot-tan {
+            background: #d1a56f
+        }
+
+        .dot-white {
+            background: #fbfbf9
+        }
+
+        .dot-black {
+            background: #1f1f1f
+        }
+
+        .dot-grey {
+            background: #8b8d8f
+        }
+
+        @media(min-width:992px) {
+            .product.wide {
+                aspect-ratio: 8/5
+            }
+        }
+
+        @media(max-width:991.98px) {
+            .shop {
+                display: block
+            }
+
+            .side {
+                display: none
+            }
+
+            .pi {
+                padding: 16px
+            }
+
+            .pcode {
+                left: 16px;
+                bottom: 14px
+            }
+
+            .dots {
+                right: 16px;
+                bottom: 17px
+            }
+
+            .pn,
+            .pn small,
+            .pcode {
+                font-size: 12px
+            }
+        }
+
+        @media(hover:none) {
+            .product .is-back {
+                opacity: 0
+            }
+
+            .pi,
+            .pn small,
+            .pcode {
+                color: #555
+            }
+        }
+
+        /* ===== FOOTER (from index) ===== */
+        .big-footer {
+            position: relative;
+            z-index: 2;
+            padding: 96px 28px 0;
+            background: var(--ink);
+            color: #fff;
+            overflow: hidden
+        }
+
+        .big-footer-inner {
+            max-width: 1600px;
+            margin: 0 auto
+        }
+
+        .bf-lead {
+            max-width: 12em;
+            margin-bottom: 36px;
+            font-family: var(--font-head);
+            font-size: clamp(30px, 3.6vw, 56px);
+            font-weight: 300;
+            line-height: 1.12
+        }
+
+        .bf-news {
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            max-width: 460px
+        }
+
+        .bf-news .form-control {
+            flex: 1;
+            min-width: 0;
+            padding: 12px 0;
+            border: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .5);
+            border-radius: 0;
+            background: transparent;
+            color: #fff;
+            box-shadow: none
+        }
+
+        .bf-news .form-control::placeholder {
+            color: rgba(255, 255, 255, .55)
+        }
+
+        .bf-news .form-control:focus {
+            border-bottom-color: #fff;
+            background: transparent;
+            color: #fff;
+            box-shadow: none
+        }
+
+        .bf-title {
+            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            opacity: .55
+        }
+
+        .bf-links a {
+            display: block;
+            padding: 5px 0;
+            font-size: 15px;
+            transition: opacity .2s
+        }
+
+        .bf-links a:hover {
+            opacity: .55
+        }
+
+        .bf-contact {
+            margin-top: 56px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, .18);
+            font-size: 14px
+        }
+
+        .bf-contact p {
+            opacity: .75
+        }
+
+        .bf-contact a {
+            font-size: clamp(20px, 2vw, 28px);
+            font-weight: 300
+        }
+
+        .bf-wordmark {
+            margin: 56px 0 -.12em;
+            font-size: clamp(44px, 14vw, 280px);
+            font-weight: 300;
+            letter-spacing: .08em;
+            text-indent: .08em;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, .12);
+            user-select: none
+        }
+
+        .site-footer {
+            position: relative;
+            z-index: 2;
+            padding: 22px 40px;
+            background: var(--light)
+        }
+
+        .foot-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            font-size: 13px
+        }
+
+        .foot-row h6 {
+            font-size: 13px;
+            font-weight: 700
+        }
+
+        .foot-links {
+            display: flex;
+            gap: 40px;
+            margin: 0 auto 0 24px;
+            font-weight: 700
+        }
+
+        .foot-links.right {
+            margin: 0
+        }
+
+        .foot-links a:hover {
+            opacity: .55
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px
+        }
+
+        .socials a {
+            display: grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--ink);
+            border-radius: 50%;
+            font-size: 11px
+        }
+
+        .socials a:hover {
+            background: var(--ink);
+            color: #fff
+        }
+
+        #top {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 40;
+            display: none;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: #fff
+        }
+
+        @media(max-width:991.98px) {
+            .big-footer {
+                padding: 64px 16px 0
+            }
+
+            .bf-contact,
+            .bf-wordmark {
+                margin-top: 40px
+            }
+
+            .site-footer {
+                padding: 20px
+            }
+
+            .foot-links,
+            .foot-links.right {
+                width: 100%;
+                margin: 0;
+                gap: 24px
+            }
+        }
+
+        :focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 3px
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header class="site-header" id="header" data-solid>
+        <a href="index.html" class="hd-logo" aria-label="Aurelle home">AURELLE</a>
+        <nav class="main-nav" id="mainNav" aria-label="Main">
+            <ul>
+                <li><button type="button" data-mega="fans">fans</button></li>
+                <li><button type="button" data-mega="lighting">lighting</button></li>
+                <li><a href="journal.html">journal</a></li>
+                <li><a href="story.html">story</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a href="shop.html">shop</a></li>
+                <li class="nav-news">
+                    <p>Subscribe to newsletter</p><a class="hd-subscribe" href="newsletter.html">Subscribe</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="header-tools">
+            <button type="button" class="hd-btn hd-lang" data-open-lang>EN</button>
+            <button type="button" class="hd-btn menu-toggle" id="menuToggle" aria-label="Open menu"
+                aria-expanded="false"><span></span></button>
+        </div>
+    </header>
+
+    <section class="mega" id="mega-fans" role="dialog" aria-label="Fans">
+        <div class="mega-top">
+            <a href="index.html" class="hd-logo">AURELLE</a>
+            <ul class="mega-nav">
+                <li><button type="button" class="hd-btn" data-mega="fans">fans</button></li>
+                <li><button type="button" class="hd-btn" data-mega="lighting">lighting</button></li>
+                <li><a href="journal.html">journal</a></li>
+                <li><a href="story.html">story</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a href="shop.html">shop</a></li>
+            </ul>
+            <div class="mega-right">
+                <button type="button" class="hd-btn hd-lang" data-open-lang>EN</button>
+                <button type="button" class="hd-btn mega-close" data-close aria-label="Close">&larr;</button>
+            </div>
+        </div>
+        <div class="mega-body">
+            <div class="prods-list">
+                <button type="button" class="hd-btn mega-back" data-close>&larr; BACK</button>
+                <ul>
+                    <li><a href="solis.html">Solis</a></li>
+                    <li><a href="woodie.html">Woodie</a></li>
+                    <li><a href="tube.html">Tube</a></li>
+                    <li><a href="contemporary.html">Contemporary</a></li>
+                    <li><a href="signature.html">Signature</a></li>
+                    <li><a href="aeratron.html">Aeratron</a></li>
+                </ul>
+            </div>
+            <div class="prods-list small">
+                <ul>
+                    <h1><a href="all-products.html">ALL PRODUCTS</a></h1>
+                    <li><a href="new-collections.html">new collections</a></li>
+                    <li><a href="warranty.html">warranty registration</a></li>
+                    <li><a href="catalogues.html">Catalogues</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="mega" id="mega-lighting" role="dialog" aria-label="Lighting">
+        <div class="mega-top">
+            <a href="index.html" class="hd-logo">AURELLE</a>
+            <ul class="mega-nav">
+                <li><button type="button" class="hd-btn" data-mega="fans">fans</button></li>
+                <li><button type="button" class="hd-btn" data-mega="lighting">lighting</button></li>
+                <li><a href="journal.html">journal</a></li>
+                <li><a href="story.html">story</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a href="shop.html">shop</a></li>
+            </ul>
+            <div class="mega-right">
+                <button type="button" class="hd-btn hd-lang" data-open-lang>EN</button>
+                <button type="button" class="hd-btn mega-close" data-close aria-label="Close">&larr;</button>
+            </div>
+        </div>
+        <div class="mega-body">
+            <div class="prods-list">
+                <button type="button" class="hd-btn mega-back" data-close>&larr; BACK</button>
+                <ul>
+                    <li><a href="belo.html">Belo</a></li>
+                    <li><a href="enso.html">Ensō</a></li>
+                </ul>
+            </div>
+            <div class="prods-list small">
+                <ul>
+                    <li><a href="all-lighting.html">all lighting</a></li>
+                    <li><a href="new-collections.html">new collections</a></li>
+                    <li><a href="warranty.html">warranty registration</a></li>
+                    <li><a href="catalogues.html">Catalogues</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="lang-frame" id="langFrame" role="dialog" aria-label="Change Country">
+        <div class="lang-top">
+            <span class="hd-logo">AURELLE</span>
+            <button type="button" class="hd-btn mega-close" data-close-lang aria-label="Close">&times;</button>
+        </div>
+        <div class="lang-menu">
+            <h4>Change Country</h4>
+            <ul>
+                <li><a href="index.html">global site</a></li>
+                <li><a href="index-zh.html">mandarin</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ============ PRODUCTS ============ -->
+    <main class="shop">
+
+        <aside class="side">
+            <h1><a href="./all-products.html" class="active">ALL PRODUCTS</a></h1>
+            <ul>
+                <li><a href="./belo.html">Belo</a></li>
+                <li><a href="./enso.html">Enso</a></li>
+            </ul>
+            <div class="new"><a href="./new-collection.html">New Collections</a></div>
+        </aside>
+
+        <section class="grid-area">
+
+            <!-- row 1 : three equal cards -->
+            <div class="row g-1">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/fan-clean-1122x1402.png" alt="Woodie 44"
+                                loading="lazy"></div>
+                        <div class="pf is-back"><img
+                                src="https://images.pexels.com/photos/3935316/pexels-photo-3935316.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop"
+                                alt="Woodie 44 detail" loading="lazy"></div>
+                        <div class="pi"><span class="pn">Woodie 44<small>USD 800</small></span><span
+                                class="pcode">44HSDF</span><i class="dots"><b class="dot-black"></b><b
+                                    class="dot-tan"></b><b class="dot-white"></b></i></div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img
+                                src="https://images.pexels.com/photos/3935316/pexels-photo-3935316.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop"
+                                alt="Woodie 44" loading="lazy"></div>
+                        <div class="pf is-back"><img src="../img/home/fan-clean-1122x1402.png" alt="Woodie 44"
+                                loading="lazy"></div>
+                        <div class="pi"><span class="pn">Woodie 44<small>USD 800</small></span><span
+                                class="pcode">44HSDF</span></div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-4">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/Sculpted White Leaf-Blade Ceiling Fan.png"
+                                alt="Woodie 50" loading="lazy"></div>
+                        <div class="pf is-back"><img
+                                src="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop"
+                                alt="Woodie 50 detail" loading="lazy"></div>
+                        <div class="pi"><span class="pn">Woodie 50<small>USD 850</small></span><span
+                                class="pcode">50HSDF</span><i class="dots"><b class="dot-black"></b><b
+                                    class="dot-white"></b><b class="dot-brown"></b></i></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- row 2 : small, small, wide VIDEO -->
+            <div class="row g-1 mt-0">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img
+                                src="https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=700&h=875&fit=crop"
+                                alt="Torque 58" loading="lazy"></div>
+                        <div class="pf is-back"><img
+                                src="https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&cs=tinysrgb&w=700&h=875&fit=crop"
+                                alt="Torque 58" loading="lazy"></div>
+                        <div class="pi"><span class="pn">Torque 58<small>USD 650</small></span><span
+                                class="pcode">58HSDF</span></div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/Modern Black Ring Ceiling Fan.png"
+                                alt="Torque 50" loading="lazy"></div>
+                        <div class="pf is-back"><img src="../img/home/Sculpted White Leaf-Blade Ceiling Fan.png"
+                                alt="Torque 50" loading="lazy"></div>
+                        <div class="pi"><span class="pn">Torque 50<small>USD 650</small></span><span
+                                class="pcode">50TQ</span><i class="dots"><b class="dot-white"></b><b
+                                    class="dot-black"></b></i></div>
+                    </a>
+                </div>
+
+                <!-- VIDEO CARD (autoplay, no hover effect) -->
+                <div class="col-12 col-lg-6">
+                    <a class="product wide is-video" href="single-product.html">
+                        <div class="pf is-front">
+                            <video autoplay muted loop playsinline disablepictureinpicture preload="auto">
+                                <source src="../img/home-video.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="pi"><span class="pn" style="color:#fff">Woodie 44<small style="color:#fff">USD
+                                    800</small></span><span class="pcode" style="color:#fff">44HSDF</span></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- row 3 : wide image, small, small VIDEO -->
+            <div class="row g-1 mt-0">
+                <div class="col-12 col-lg-6">
+                    <a class="product wide" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/home-banner-fan-7.jpg" alt="Solis 40"
+                                loading="lazy"></div>
+                        <div class="pf is-back"><img src="../img/home/home-fan-1-hover.avif" alt="Solis 40"
+                                loading="lazy"></div>
+                        <div class="pi"><span class="pn">Solis 40<small>USD 850</small></span><span
+                                class="pcode">40HSE-D</span><i class="dots"><b class="dot-black"></b><b
+                                    class="dot-grey"></b><b class="dot-white"></b></i></div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/home-fan-2.avif" alt="Solis 40" loading="lazy">
+                        </div>
+                        <div class="pf is-back"><img src="../img/home/home-fan-2-hover.avif" alt="Solis 40"
+                                loading="lazy"></div>
+                        <div class="pi"><span class="pn">Solis 40<small>USD 850</small></span><span
+                                class="pcode">40HSEF-D</span><i class="dots"><b class="dot-black"></b><b
+                                    class="dot-grey"></b><b class="dot-white"></b></i></div>
+                    </a>
+                </div>
+
+                <!-- VIDEO CARD (autoplay, no hover effect) -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <a class="product is-video" href="single-product.html">
+                        <div class="pf is-front">
+                            <video autoplay muted loop playsinline disablepictureinpicture preload="auto">
+                                <source src="../img/home-video.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="pi"><span class="pn" style="color:#fff">Padera 60<small style="color:#fff">USD
+                                    900</small></span><span class="pcode" style="color:#fff">60LP31-L</span></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- row 4 : three equal cards -->
+            <div class="row g-1 mt-0">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/home-fan-3.avif" alt="Tube" loading="lazy"></div>
+                        <div class="pf is-back"><img src="../img/home/home-fan-3-hover.avif" alt="Tube" loading="lazy">
+                        </div>
+                        <div class="pi"><span class="pn">Tube 52<small>USD 700</small></span><span
+                                class="pcode">52TB</span><i class="dots"><b class="dot-black"></b><b
+                                    class="dot-white"></b></i></div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/home-fan-5.avif" alt="Signature" loading="lazy">
+                        </div>
+                        <div class="pf is-back"><img src="../img/home/home-fan-5-hover.avif" alt="Signature"
+                                loading="lazy"></div>
+                        <div class="pi"><span class="pn">Signature 60<small>USD 950</small></span><span
+                                class="pcode">60SG</span><i class="dots"><b class="dot-brown"></b><b
+                                    class="dot-tan"></b></i></div>
+                    </a>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <a class="product" href="single-product.html">
+                        <div class="pf is-front"><img src="../img/home/home-fan-4.avif" alt="Aeratron" loading="lazy">
+                        </div>
+                        <div class="pf is-back"><img src="../img/home/home-fan-4-hover.avif" alt="Aeratron"
+                                loading="lazy"></div>
+                        <div class="pi"><span class="pn">Aeratron 56<small>USD 990</small></span><span
+                                class="pcode">56AE</span><i class="dots"><b class="dot-grey"></b><b
+                                    class="dot-white"></b></i></div>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="big-footer">
+        <div class="big-footer-inner">
+            <div class="row g-5">
+                <div class="col-12 col-lg-5">
+                    <h2 class="bf-lead">Soft light. Quiet air. Made to last.</h2>
+                    <form class="bf-news" onsubmit="event.preventDefault()">
+                        <input type="email" class="form-control" placeholder="Your email address"
+                            aria-label="Email address" required>
+                        <button type="submit" class="btn btn-outline-light rounded-0 btn-cta">Subscribe</button>
+                    </form>
+                </div>
+                <div class="col-12 col-lg-7">
+                    <div class="row g-4 bf-links">
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Fans</h6>
+                            <a href="solis.html">Solis</a><a href="woodie.html">Woodie</a><a href="tube.html">Tube</a><a
+                                href="contemporary.html">Contemporary</a><a href="signature.html">Signature</a><a
+                                href="aeratron.html">Aeratron</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Lighting</h6>
+                            <a href="belo.html">Belo</a><a href="enso.html">Ensō</a><a href="new-collections.html">New
+                                collections</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Company</h6>
+                            <a href="story.html">Story</a><a href="journal.html">Journal</a><a
+                                href="contact.html">Contact</a><a href="where-to-buy.html">Where to buy</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <h6 class="bf-title">Support</h6>
+                            <a href="warranty.html">Warranty registration</a><a href="catalogues.html">Catalogues</a><a
+                                href="faq.html">FAQ</a><a href="terms.html">Terms And Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bf-contact d-flex flex-column flex-md-row justify-content-between gap-3">
+                <div>
+                    <p>Questions about a product or an order?</p><a
+                        href="mailto:hello@example.com">hello@example.com</a>
+                </div>
+                <div class="text-md-end">
+                    <p>Showroom hours</p>
+                    <p>Mon – Sat, 10:00 – 18:00</p>
+                </div>
+            </div>
+            <div class="bf-wordmark" aria-hidden="true">AURELLE</div>
+        </div>
+    </footer>
+
+    <div class="site-footer">
+        <div class="foot-row">
+            <h6>Copyright &copy; Aurelle 2026</h6>
+            <div class="foot-links"><a href="terms.html">Terms And Conditions</a><a href="faq.html">FAQ</a></div>
+            <div class="foot-links right"><a href="contact.html">Contact</a><a href="newsletter.html">Newsletter</a><a
+                    href="catalogues.html">Catalogues</a></div>
+            <div class="socials">
+                <a href="#" aria-label="LINE">L</a><a href="#" aria-label="Instagram">Ig</a><a href="#"
+                    aria-label="Facebook">Fb</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="top" aria-label="Back to top">&uarr;</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            const body = document.body, menuToggle = document.getElementById("menuToggle"),
+                langFrame = document.getElementById("langFrame"),
+                megas = Array.from(document.querySelectorAll(".mega")),
+                mqDesktop = window.matchMedia("(min-width: 992px)");
+
+            function syncScrollLock() {
+                body.classList.toggle("no-scroll",
+                    body.classList.contains("menu-open") ||
+                    megas.some(m => m.classList.contains("is-open")) ||
+                    langFrame.classList.contains("is-open"));
+            }
+            function setMenu(open) {
+                body.classList.toggle("menu-open", open);
+                menuToggle.setAttribute("aria-expanded", open);
+                syncScrollLock();
+            }
+            function closeMegas() { megas.forEach(m => m.classList.remove("is-open")); syncScrollLock(); }
+            function openMega(name) {
+                setMenu(false);
+                megas.forEach(m => m.classList.toggle("is-open", m.id === "mega-" + name));
+                syncScrollLock();
+            }
+            function setLang(open) { langFrame.classList.toggle("is-open", open); syncScrollLock(); }
+
+            menuToggle.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+            document.querySelectorAll("#mainNav a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+            document.querySelectorAll("[data-mega]").forEach(b => b.addEventListener("click", () => openMega(b.dataset.mega)));
+            document.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeMegas));
+            document.querySelectorAll("[data-open-lang]").forEach(b => b.addEventListener("click", () => setLang(true)));
+            document.querySelector("[data-close-lang]").addEventListener("click", () => setLang(false));
+            document.addEventListener("keydown", e => { if (e.key === "Escape") { setLang(false); closeMegas(); setMenu(false); } });
+            mqDesktop.addEventListener("change", e => { if (e.matches) setMenu(false); });
+
+            /* highlight the sidebar link that matches the current page */
+            // var here = location.pathname.split("/").pop();
+            // document.querySelectorAll(".side li a").forEach(a => {
+            //     if (a.getAttribute("href") === here) a.classList.add("active");
+            // });
+
+            /* force videos to autoplay (muted) */
+            document.querySelectorAll("video").forEach(function (v) {
+                v.muted = true;
+                var p = v.play();
+                if (p && p.catch) p.catch(function () { });
+            });
+            document.addEventListener("touchstart", function once() {
+                document.querySelectorAll("video").forEach(function (v) { v.play().catch(function () { }); });
+                document.removeEventListener("touchstart", once);
+            }, { passive: true });
+
+            /* back to top */
+            var topBtn = document.getElementById("top");
+            function showHide() { topBtn.style.display = window.scrollY > window.innerHeight / 1.5 ? "grid" : "none"; }
+            window.addEventListener("scroll", showHide, { passive: true });
+            showHide();
+            topBtn.addEventListener("click", function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+        })();
+    </script>
+</body>
+
+</html>
