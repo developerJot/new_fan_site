@@ -101,43 +101,47 @@ const PRODUCTS = [
         card: ["./images/AMJ-H001-White.png", "https://images.pexels.com/photos/3958953/pexels-photo-3958953.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop"]
     },
 
+
+
+
+
     /* ---------------------------------------------------------------
-       2) AMJ-H001 BLACK
+       2) AMJ-FH002-White
        --------------------------------------------------------------- */
     {
-        slug: "amj-h001-black",
-        family: "AMJ-H001",
+        slug: "amj-FH002-White",
+        family: "AMJ-FH002-White",
         category: "fans",
         code: "AMJ-H001-black",
         name: "AMJ-H001",
         type: "Ceiling fan",
         price: 250,
-        color: { name: "Black", hex: "#1a1a1a" },
+        // color: { name: "Black", hex: "#1a1a1a" },
         desc: "The same quiet fan in a deep black finish. Slim body, smooth airflow, made to run every day.",
         catalogue: "",
 
         images: [
-            "./images/AMJ-H001-black.png",
-            "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&fit=crop",
-            "https://images.pexels.com/photos/3958953/pexels-photo-3958953.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&fit=crop"
+            "./images/amj-fh002.png",
+            "./images/amj-fh002-black.png",
+            "./images/amj-fh002.png",
         ],
 
         video: "../img/home-video.mp4",
         poster: "https://images.pexels.com/photos/3935353/pexels-photo-3935353.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
 
-        inspire: {
-            title: "Calm, in black",
-            text: "A dark finish that disappears into the ceiling, with a steady motor that keeps the room fresh without the noise.",
-            img: "https://images.pexels.com/photos/3958953/pexels-photo-3958953.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
-        },
+        // inspire: {
+        //     title: "Calm, in black",
+        //     text: "A dark finish that disappears into the ceiling, with a steady motor that keeps the room fresh without the noise.",
+        //     img: "https://images.pexels.com/photos/3958953/pexels-photo-3958953.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
+        // },
 
         duo: [
             {
-                img: "https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop",
+                img: "./images/amj-fh002-down-1.png",
                 cap: "A strong, quiet motor built to last."
             },
             {
-                img: "https://images.pexels.com/photos/3935353/pexels-photo-3935353.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop",
+                img: "./images/amj-fh002-down-2.png",
                 cap: "A matte finish that is easy to wipe clean."
             }
         ],
@@ -168,43 +172,48 @@ const PRODUCTS = [
         card: ["./images/AMJ-H001-black.png", "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop"]
     },
 
+
+
+
+
+
     /* ---------------------------------------------------------------
-       3) AMJ-H001 GRAY
+       3) AMJ-H001 Black
        --------------------------------------------------------------- */
     {
-        slug: "amj-h001-gray",
-        family: "AMJ-H001",
+        slug: "amj-h001-black",
+        family: "AMJ-H001-Black",
         category: "fans",
         code: "AMJ-H001-gray",
         name: "AMJ-H001",
         type: "Ceiling fan",
         price: 250,
-        color: { name: "Gray", hex: "#9a9a97" },
+        // color: { name: "Gray", hex: "#9a9a97" },
         desc: "The same quiet fan in a soft gray finish that fits almost any room.",
         catalogue: "",
 
         images: [
-            "./images/AMJ-H001-gray.png",
-            "https://images.pexels.com/photos/3958953/pexels-photo-3958953.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&fit=crop",
-            "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&fit=crop"
+            "./images/AMJ-H001-black.png",
+            "./images/AMJ-H001-White.png",
+            "./images/AMJ-H001-black2.png",
         ],
 
         video: "../img/home-video.mp4",
         poster: "https://images.pexels.com/photos/3935353/pexels-photo-3935353.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
 
-        inspire: {
-            title: "Soft gray, steady air",
-            text: "A neutral colour and a quiet motor. It keeps the air moving and stays out of the way.",
-            img: "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
-        },
+        // inspire: {
+        //     title: "Soft gray, steady air",
+        //     text: "A neutral colour and a quiet motor. It keeps the air moving and stays out of the way.",
+        //     img: "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
+        // },
 
         duo: [
             {
-                img: "https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop",
+                img: "./images/fan-H001-black-down-2.png",
                 cap: "A strong, quiet motor built to last."
             },
             {
-                img: "https://images.pexels.com/photos/3935353/pexels-photo-3935353.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop",
+                img: "./images/fan-H001-black-down-1.png",
                 cap: "A smooth finish that is easy to wipe clean."
             }
         ],
