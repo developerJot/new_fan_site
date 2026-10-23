@@ -41,27 +41,25 @@ const PRODUCTS = [
         images: [
             "./images/AMJ-H001-White.png",
             "./images/AMJ-H001-black.png",
-            "./images/AMJ-H001-White.png",
-            "./images/AMJ-H001-black.png",
-            "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&fit=crop"
+            "./images/AMJ-H001-black2.png",
         ],
 
         video: "../img/home-video.mp4",
         poster: "https://images.pexels.com/photos/3935353/pexels-photo-3935353.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
 
-        inspire: {
-            title: "Air that moves quietly",
-            text: "AMJ-H001 keeps a room fresh without the noise. The slim blades and steady motor give a calm, even breeze all day.",
-            img: "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
-        },
+        // inspire: {
+        //     title: "Air that moves quietly",
+        //     text: "AMJ-H001 keeps a room fresh without the noise. The slim blades and steady motor give a calm, even breeze all day.",
+        //     img: "https://images.pexels.com/photos/3958956/pexels-photo-3958956.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
+        // },
 
         duo: [
             {
-                img: "https://images.pexels.com/photos/7601104/pexels-photo-7601104.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop",
+                img: "./images/AMJ-H001-White-down-1.png",
                 cap: "A strong, quiet motor built to last."
             },
             {
-                img: "https://images.pexels.com/photos/3935353/pexels-photo-3935353.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop",
+                img: "./images/AMJ-H001-White-down-2.png",
                 cap: "A smooth finish that is easy to wipe clean."
             }
         ],
