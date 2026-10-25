@@ -1683,7 +1683,7 @@
             $("pdName").textContent = p.name || "";
             $("pdType").textContent = p.type || "";
             $("pdDesc").textContent = p.desc || "";
-            $("pdPrice").textContent = has(p.price) ? "USD " + p.price : "";
+            $("pdPrice").textContent = has(p.price) ? "Rs. " + p.price : "";
 
             $("pdGallery").insertAdjacentHTML("afterbegin",
                 images.map((src, i) =>
